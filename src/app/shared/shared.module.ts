@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule, MatIconModule, MatToolbarModule, MatButtonModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatSlideToggleModule, MatCheckboxModule, MatTooltipModule, MatGridListModule, MatSidenavModule, MatListModule, MatChipsModule, MatTabsModule } from '@angular/material';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatSidenavModule, MatSlideToggleModule, MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -27,7 +27,7 @@ const MATERIAL_MODULES = [
 
 /**
  * Th SharedModule is the place where we can put commonly used directives, pipes, and components
- * into one module and import that module wherever you need it.
+ * into one module and import that module wherever we need it.
  *
  * @export
  * @class SharedModule

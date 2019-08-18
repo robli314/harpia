@@ -15,10 +15,6 @@
     min-width: 300px;
 }
 
-mat-card{
-    z-index: 9999;
-}
-
 mat-card-title,
 mat-card-content {
     display: flex;
@@ -35,16 +31,7 @@ mat-card-content {
 .button {
     display: flex;
     justify-content: center;
-    min-width: fit-content;    
-}
-
-.logo {
-    margin-top: 0;
-    margin-bottom: 0.75rem;
-    text-align: center;
-    img {
-        max-width: 250px; 
-    }
+    min-width: fit-content;
 }
 
 .sub-title {
@@ -56,56 +43,7 @@ mat-card-content {
     width: 100%;
 }
 
-.half-width {
-    margin: auto;
-    width: 50%;
-}
-
 .form-control-group.accept-group {
     display: flex;
     justify-content: space-between;
-
-    .forgot-password {
-        line-height: 2;
-    }
-}
-
-.separator {
-    font-size: 15px;
-    font-weight: 600;
-    margin: 24px auto;
-    position: relative;
-    overflow: hidden;
-    width: 100px;
-    text-align: center;
-    color: rgba(0,0,0,.12);
-}
-
-.text {
-    display: inline-flex;
-    position: relative;
-    padding: 0 8px;
-    z-index: 9999;
-}
-
-.text:before {
-    border-top-color: rgba(0,0,0,.12);
-    right: 100%;
-    content: "";
-    display: block;
-    width: 30px;
-    position: absolute;
-    top: 10px;
-    border-top: 1px solid;    
-}
-
-.text:after {
-    border-top-color: rgba(0,0,0,.12);
-    left: 100%;
-    content: "";
-    display: block;
-    width: 30px;
-    position: absolute;
-    top: 10px;
-    border-top: 1px solid;    
 }
