@@ -1,0 +1,111 @@
+:host {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0px;
+    margin-bottom: -50%;
+}
+
+.form {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.mat-form-field {
+    width: 100%;
+    min-width: 300px;
+}
+
+mat-card{
+    z-index: 9999;
+}
+
+mat-card-title,
+mat-card-content {
+    display: flex;
+    justify-content: center;
+}
+
+.error {
+    padding: 16px;
+    width: 300px;
+    color: white;
+    background-color: red;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    min-width: fit-content;    
+}
+
+.logo {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    text-align: center;
+    img {
+        max-width: 250px; 
+    }
+}
+
+.sub-title {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.half-width {
+    margin: auto;
+    width: 50%;
+}
+
+.form-control-group.accept-group {
+    display: flex;
+    justify-content: space-between;
+
+    .forgot-password {
+        line-height: 2;
+    }
+}
+
+.separator {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 24px auto;
+    position: relative;
+    overflow: hidden;
+    width: 100px;
+    text-align: center;
+    color: rgba(0,0,0,.12);
+}
+
+.text {
+    display: inline-flex;
+    position: relative;
+    padding: 0 8px;
+    z-index: 9999;
+}
+
+.text:before {
+    border-top-color: rgba(0,0,0,.12);
+    right: 100%;
+    content: "";
+    display: block;
+    width: 30px;
+    position: absolute;
+    top: 10px;
+    border-top: 1px solid;    
+}
+
+.text:after {
+    border-top-color: rgba(0,0,0,.12);
+    left: 100%;
+    content: "";
+    display: block;
+    width: 30px;
+    position: absolute;
+    top: 10px;
+    border-top: 1px solid;    
+}
