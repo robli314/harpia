@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'hp-login',
@@ -14,6 +14,9 @@ export class LoginComponent implements OnInit {
     password: new FormControl('',
       [Validators.required]),
   });
+
+  title: String = 'Join now';
+  authType: String = '';
 
   constructor() { }
 

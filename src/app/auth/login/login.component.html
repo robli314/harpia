@@ -1,7 +1,9 @@
 <mat-card>
+    <mat-card-title>
+        {{title}}
+    </mat-card-title>
     <mat-card-content>
         <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
-            <p class="sub-title"></p>
             <mat-form-field appearance="outline">
                 <mat-label>Username</mat-label>
                 <input matInput id="iptUsername" placeholder="Username" formControlName="username">
@@ -16,4 +18,10 @@
                 [disabled]="!loginForm.valid">Login</button>
         </form>
     </mat-card-content>
+    <mat-card-footer>
+        <p class="text-xs-center">
+            <a [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
+            <a [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
+        </p>
+    </mat-card-footer>
 </mat-card>
