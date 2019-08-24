@@ -19,7 +19,7 @@
         </form>
     </mat-card-content>
     <mat-card-footer>
-        <p class="text-xs-center">
+        <p>
             <a [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
             <a [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
         </p>

@@ -1,3 +1,5 @@
+@import "src/app/scss/harpia";
+
 :host {
     display: flex;
     justify-content: center;
@@ -19,6 +21,10 @@ mat-card-title,
 mat-card-content {
     display: flex;
     justify-content: center;
+}
+
+mat-card-footer {
+    text-align: center;
 }
 
 .error {
@@ -46,4 +52,10 @@ mat-card-content {
 .form-control-group.accept-group {
     display: flex;
     justify-content: space-between;
+}
+
+@include media-breakpoint('xs') {
+    mat-card {
+        max-width: 87%;
+    }
 }
