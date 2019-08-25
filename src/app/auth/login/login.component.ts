@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { CustomErrorStateMatcher } from 'src/app/helpers/custom-error-state.matcher';
+import { Errors } from 'src/app/models/errors.model';
 
 @Component({
   selector: 'hp-login',
@@ -8,22 +11,51 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup = new FormGroup({
-    username: new FormControl('',
-      [Validators.required]),
-    password: new FormControl('',
-      [Validators.required]),
-  });
-
-  title: String = 'Join now';
+  title: String = '';
   authType: String = '';
+  loginForm: FormGroup;
+  matcher = new CustomErrorStateMatcher;
+  errors: Errors = { errors: {} };
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+    private fb: FormBuilder) {
 
-  ngOnInit() {
+    // default formGroup /register
+    this.loginForm = this.fb.group({
+      'username': new FormControl('', Validators.required),
+      'email': new FormControl('', [Validators.required, Validators.email]),
+      'passwordInfo': this.fb.group({
+        'password': new FormControl('', Validators.required),
+        'confirmPassword': new FormControl('', Validators.required)
+      }, { validators: this.checkPasswords })
+    });
   }
 
-  login() {
+  ngOnInit(): void {
+    this.route.url.subscribe(data => {
+      this.authType = data[data.length - 1].path;
+
+      this.title = (this.authType === 'login') ? 'Sign in' : 'Sign up';
+
+      // we do not need email and confirmPassword in case of /login
+      if (this.authType === 'login') {
+        this.loginForm = this.fb.group({
+          'username': new FormControl('', Validators.required),
+          'passwordInfo': this.fb.group({
+            'password': new FormControl('', Validators.required),
+          })
+        });
+      }
+    });
+  }
+
+  login(): void {
     console.log(this.loginForm);
+  }
+
+  checkPasswords(group: FormGroup): any {
+    let password = group.get('password').value;;
+    let confirmPassword = group.get('confirmPassword').value;
+    return password === confirmPassword ? null : { notSame: true }
   }
 }

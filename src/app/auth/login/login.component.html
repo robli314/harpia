@@ -3,25 +3,42 @@
         {{title}}
     </mat-card-title>
     <mat-card-content>
+        <hp-list-errors [errors]="errors"></hp-list-errors>
         <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
             <mat-form-field appearance="outline">
                 <mat-label>Username</mat-label>
                 <input matInput id="iptUsername" placeholder="Username" formControlName="username">
                 <mat-icon matSuffix>account_box</mat-icon>
             </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Password</mat-label>
-                <input matInput id="iptPassword" placeholder="Password" type="password" formControlName="password">
-                <mat-icon matSuffix>vpn_key</mat-icon>
+            <mat-form-field appearance="outline" *ngIf="authType === 'register'">
+                <mat-label>E-Mail</mat-label>
+                <input matInput id="iptEmail" placeholder="E-Mail" type="email" formControlName="email">
+                <mat-icon matSuffix>email</mat-icon>
             </mat-form-field>
+            <div formGroupName="passwordInfo">
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput id="iptPassword" placeholder="Password" type="password" formControlName="password">
+                    <mat-icon matSuffix>vpn_key</mat-icon>
+                </mat-form-field>
+                <mat-form-field appearance="outline" *ngIf="authType === 'register'">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput id="iptConfirmPassword" placeholder="Confirm Password" type="password"
+                        formControlName="confirmPassword" [errorStateMatcher]="matcher">
+                    <mat-icon matSuffix>vpn_key</mat-icon>
+                </mat-form-field>
+                <mat-error *ngIf="loginForm.controls['passwordInfo'].hasError('notSame')">
+                    Passwords do not match.
+                </mat-error>
+            </div>
             <button class="button full-width" mat-raised-button color="primary"
                 [disabled]="!loginForm.valid">Login</button>
         </form>
     </mat-card-content>
     <mat-card-footer>
         <p>
-            <a [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
-            <a [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
+            <a [routerLink]="['/login']" *ngIf="authType === 'register'">Have an account?</a>
+            <a [routerLink]="['/register']" *ngIf="authType === 'login'">Need an account?</a>
         </p>
     </mat-card-footer>
 </mat-card>
