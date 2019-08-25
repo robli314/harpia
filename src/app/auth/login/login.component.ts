@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CustomErrorStateMatcher } from 'src/app/helpers/custom-error-state.matcher';
 import { Errors } from 'src/app/models/errors.model';
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm);
   }
 
-  checkPasswords(group: FormGroup): any {
+  checkPasswords(group: FormGroup): ValidationErrors {
     let password = group.get('password').value;;
     let confirmPassword = group.get('confirmPassword').value;
     return password === confirmPassword ? null : { notSame: true }
