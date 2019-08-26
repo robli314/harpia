@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
           'email': new FormControl('', [Validators.required, Validators.email]),
           'passwordInfo': this.fb.group({
             'password': new FormControl('', Validators.required),
-            'confirmPassword': new FormControl('', Validators.required)
+            'confirmPassword': new FormControl('')
           }, { validators: this.checkPasswords })
         });
         break;
