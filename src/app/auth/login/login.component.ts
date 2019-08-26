@@ -19,9 +19,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private fb: FormBuilder) {
-
-    // default formGroup /register
-    this.loginForm = this.buildFormGroup('register');
   }
 
   ngOnInit(): void {
@@ -60,7 +57,7 @@ export class LoginComponent implements OnInit {
     let formGroup: FormGroup;
 
     switch (authType) {
-      case 'login': {
+      case 'register': {
         formGroup = this.fb.group({
           'username': new FormControl('', Validators.required),
           'email': new FormControl('', [Validators.required, Validators.email]),
