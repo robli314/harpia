@@ -16,7 +16,7 @@ export class UserService {
      * 
      * @param {String} authType - The type of authentication (login or register)
      * @param {*} credentials - The information needed to forward the authentication.
-     * @returns {Observable<User>} - The return, a Observable of User.
+     * @returns {Observable<User>} - The return, an Observable of User.
      * @memberof UserService
      */
     authenticate(authType: String, credentials: any): Observable<User> {

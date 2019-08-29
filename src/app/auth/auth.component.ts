@@ -44,9 +44,9 @@ export class AuthComponent implements OnInit {
 
   /**
    * Validation function responsible for validating the insertion of new password, basically the function
-   * checks if password and confirmPassword are the same, and return a ValidationErrors accordingly.
-   * @param {FormGroup} group - to be validated.
-   * @returns {ValidationErrors} - validation error result.
+   * checks if password and confirmPassword are the same, and return a ValidationErrors object accordingly.
+   * @param {FormGroup} - FormGroup to to be validated.
+   * @returns {ValidationErrors} - The validation error object.
    * @memberof AuthComponent
    */
   checkPasswords(group: FormGroup): ValidationErrors {
@@ -57,8 +57,8 @@ export class AuthComponent implements OnInit {
 
   /**
    * Function responsible for building and returning a FormGroup based on authType.
-   * @param {String} authType - authentication type.
-   * @returns {FormGroup} - form group result.
+   * @param {String} authType - The authentication type.
+   * @returns {FormGroup} - The form group result.
    * @memberof AuthComponent
    */
   buildFormGroup(authType: String): FormGroup {
