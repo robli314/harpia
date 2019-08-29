@@ -5,15 +5,15 @@ import { CustomErrorStateMatcher } from 'src/app/helpers/custom-error-state.matc
 import { Errors } from 'src/app/models/errors.model';
 
 @Component({
-  selector: 'hp-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'hp-auth',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class AuthComponent implements OnInit {
 
   title: String = '';
   authType: String = '';
-  loginForm: FormGroup;
+  authForm: FormGroup;
   matcher = new CustomErrorStateMatcher;
   errors: Errors = { errors: {} };
 
@@ -25,12 +25,13 @@ export class LoginComponent implements OnInit {
     this.route.url.subscribe(data => {
       this.authType = data[data.length - 1].path;
       this.title = (this.authType === 'login') ? 'Sign in' : 'Sign up';
-      this.loginForm = this.buildFormGroup(this.authType);
+      this.authForm = this.buildFormGroup(this.authType);
     });
   }
 
-  login(): void {
-    console.log(this.loginForm);
+  submitForm(): void {
+    this.errors = { errors: {} };
+    const credentials = this.authForm.value;
   }
 
   /**
@@ -69,7 +70,7 @@ export class LoginComponent implements OnInit {
         break;
       } default: {
         // we do not need email and confirmPassword in case of /login
-        formGroup = this.loginForm = this.fb.group({
+        formGroup = this.authForm = this.fb.group({
           'username': new FormControl('', Validators.required),
           'passwordInfo': this.fb.group({
             'password': new FormControl('', Validators.required),

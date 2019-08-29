@@ -4,7 +4,7 @@
     </mat-card-title>
     <mat-card-content>
         <hp-list-errors [errors]="errors"></hp-list-errors>
-        <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
+        <form class="form" [formGroup]="authForm" (ngSubmit)="submitForm()">
             <mat-form-field appearance="outline">
                 <mat-label>Username</mat-label>
                 <input matInput id="iptUsername" placeholder="Username" formControlName="username">
@@ -27,12 +27,12 @@
                         formControlName="confirmPassword" [errorStateMatcher]="matcher">
                     <mat-icon matSuffix>vpn_key</mat-icon>
                 </mat-form-field>
-                <mat-error *ngIf="loginForm.controls['passwordInfo'].hasError('notSame')">
+                <mat-error *ngIf="authForm.controls['passwordInfo'].hasError('notSame')">
                     Passwords do not match.
                 </mat-error>
             </div>
             <button class="button full-width" mat-raised-button color="primary"
-                [disabled]="!loginForm.valid">Login</button>
+                [disabled]="!authForm.valid">{{ title }}</button>
         </form>
     </mat-card-content>
     <mat-card-footer>
