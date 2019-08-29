@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CustomErrorStateMatcher } from 'src/app/helpers/custom-error-state.matcher';
 import { Errors } from 'src/app/models/errors.model';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'hp-auth',
@@ -18,7 +19,9 @@ export class AuthComponent implements OnInit {
   errors: Errors = { errors: {} };
 
   constructor(private route: ActivatedRoute,
-    private fb: FormBuilder) {
+    private router: Router,
+    private fb: FormBuilder,
+    private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -32,6 +35,11 @@ export class AuthComponent implements OnInit {
   submitForm(): void {
     this.errors = { errors: {} };
     const credentials = this.authForm.value;
+
+    this.userService.authenticate(this.authType, credentials).subscribe(data => this.router.navigateByUrl('/'),
+      err => {
+        this.errors = err;
+      });
   }
 
   /**
@@ -39,7 +47,7 @@ export class AuthComponent implements OnInit {
    * checks if password and confirmPassword are the same, and return a ValidationErrors accordingly.
    * @param {FormGroup} group - to be validated.
    * @returns {ValidationErrors} - validation error result.
-   * @memberof LoginComponent
+   * @memberof AuthComponent
    */
   checkPasswords(group: FormGroup): ValidationErrors {
     let password = group.get('password').value;;
@@ -51,7 +59,7 @@ export class AuthComponent implements OnInit {
    * Function responsible for building and returning a FormGroup based on authType.
    * @param {String} authType - authentication type.
    * @returns {FormGroup} - form group result.
-   * @memberof LoginComponent
+   * @memberof AuthComponent
    */
   buildFormGroup(authType: String): FormGroup {
 
@@ -69,7 +77,7 @@ export class AuthComponent implements OnInit {
         });
         break;
       } default: {
-        // we do not need email and confirmPassword in case of /login
+        // remove email and confirmPassword in case of /login page
         formGroup = this.authForm = this.fb.group({
           'username': new FormControl('', Validators.required),
           'passwordInfo': this.fb.group({
