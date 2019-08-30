@@ -32,7 +32,7 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  submitForm(): void {
+  onSubmitForm(): void {
     this.errors = { errors: {} };
     const credentials = this.authForm.value;
 

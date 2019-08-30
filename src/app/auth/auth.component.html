@@ -4,7 +4,7 @@
     </mat-card-title>
     <mat-card-content>
         <hp-list-errors [errors]="errors"></hp-list-errors>
-        <form class="form" [formGroup]="authForm" (ngSubmit)="submitForm()">
+        <form class="form" [formGroup]="authForm" (ngSubmit)="onSubmitForm()">
             <mat-form-field appearance="outline">
                 <mat-label>Username</mat-label>
                 <input matInput id="iptUsername" placeholder="Username" formControlName="username">
