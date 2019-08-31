@@ -1,13 +1,23 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { distinctUntilChanged, flatMap } from 'rxjs/operators';
 import { User } from '../models/user.model';
+import { ApiService } from './api.service';
+import { JwtService } from './jwt.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    constructor() { }
+    private currentUserSubject = new BehaviorSubject<User>({} as User);
+    public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
+
+    private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
+    public isAuthenticated = this.isAuthenticatedSubject.asObservable();
+
+    constructor(private apiService: ApiService,
+        private jwtService: JwtService) { }
 
     /**
      *  It calls the rest service to attempt the authentication (sign in or sign up)
@@ -20,7 +30,21 @@ export class UserService {
      * @memberof UserService
      */
     authenticate(authType: String, credentials: any): Observable<User> {
-        return of(null);
+        return this.apiService.post('/auth/local', credentials).pipe(flatMap(data => {
+            this.jwtService.saveToken(data.token);
+            return this.apiService.get('/api/user/me');
+        }));
+    }
+
+    /**
+     * It set the current user data into the observable, in addition,
+     * set the isAuthenticated to true.
+     * @param {User} user
+     * @memberof UserService
+     */
+    setAuth(user: User): void {
+        this.currentUserSubject.next(user);
+        this.isAuthenticatedSubject.next(true);
     }
 
 }

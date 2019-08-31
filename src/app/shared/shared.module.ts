@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatSidenavModule, MatSlideToggleModule, MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
@@ -38,11 +39,13 @@ const MATERIAL_MODULES = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    HttpClientModule,
     ...MATERIAL_MODULES
   ],
   exports: [
     CommonModule,
     ReactiveFormsModule,
+    HttpClientModule,
     ...MATERIAL_MODULES,
     ListErrorsComponent
   ]

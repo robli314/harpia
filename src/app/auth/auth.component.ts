@@ -34,9 +34,14 @@ export class AuthComponent implements OnInit {
 
   onSubmitForm(): void {
     this.errors = { errors: {} };
-    const credentials = this.authForm.value;
-
-    this.userService.authenticate(this.authType, credentials).subscribe(data => this.router.navigateByUrl('/'),
+    this.userService.authenticate(this.authType, {
+      'username': this.authForm.value.username,
+      'password': this.authForm.value.passwordInfo.password,
+      'email': this.authForm.value.email
+    }).subscribe(user => {
+      console.log(user);
+      this.router.navigateByUrl('/');
+    },
       err => {
         this.errors = err;
       });
