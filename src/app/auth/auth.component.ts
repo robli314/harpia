@@ -33,17 +33,15 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmitForm(): void {
-    this.errors = { errors: {} };
     this.userService.authenticate(this.authType, {
       'username': this.authForm.value.username,
       'password': this.authForm.value.passwordInfo.password,
       'email': this.authForm.value.email
     }).subscribe(user => {
-      console.log(user);
       this.router.navigateByUrl('/');
     },
       err => {
-        this.errors = err;
+        this.errors = { errors: { 'Error:': err.message } };
       });
   }
 
