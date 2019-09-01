@@ -2,9 +2,6 @@
     <mat-card-title>
         {{title}}
     </mat-card-title>
-    <mat-card-header>
-        <hp-list-errors [errors]="errors"></hp-list-errors>
-    </mat-card-header>
     <mat-card-content>
         <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmitForm()">
             <mat-form-field appearance="outline">

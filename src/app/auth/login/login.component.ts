@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CustomErrorStateMatcher } from 'src/app/helpers/custom-error-state.matcher';
-import { Errors } from 'src/app/models/errors.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,9 +14,8 @@ export class LoginComponent implements OnInit {
   title: String = '';
   loginForm: FormGroup;
   matcher = new CustomErrorStateMatcher;
-  errors: Errors = { errors: {} };
 
-  constructor(private route: ActivatedRoute,
+  constructor(
     private router: Router,
     private fb: FormBuilder,
     private userService: UserService) {
@@ -40,9 +38,6 @@ export class LoginComponent implements OnInit {
       'email': this.loginForm.value.email
     }).subscribe(user => {
       this.router.navigateByUrl('/');
-    },
-      err => {
-        this.errors = { errors: { 'Error:': err.message } };
-      });
+    });
   }
 }

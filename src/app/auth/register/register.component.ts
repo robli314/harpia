@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 import { CustomErrorStateMatcher } from 'src/app/helpers/custom-error-state.matcher';
-import { Errors } from 'src/app/models/errors.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,9 +15,8 @@ export class RegisterComponent implements OnInit {
   title: String = '';
   registerForm: FormGroup;
   matcher = new CustomErrorStateMatcher;
-  errors: Errors = { errors: {} };
 
-  constructor(private route: ActivatedRoute,
+  constructor(
     private router: Router,
     private fb: FormBuilder,
     private userService: UserService) {
@@ -38,11 +37,17 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmitForm(): void {
-
-  }
-
-  register() {
-
+    this.userService.register({
+      'username': this.registerForm.value.username,
+      'name': this.registerForm.value.name,
+      'lastName': this.registerForm.value.lastName,
+      'password': this.registerForm.value.passwordInfo.password,
+      'email': this.registerForm.value.email
+    }).pipe(map(user => {
+      return this.userService.authenticate(user);
+    })).subscribe(data => {
+      this.router.navigateByUrl('/');
+    });
   }
 
   /**

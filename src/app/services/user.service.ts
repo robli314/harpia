@@ -22,13 +22,13 @@ export class UserService {
         private jwtService: JwtService) { }
 
     /**
-     *
+     * It registers a new user.
      *
      * @param {*} credentials - The information need to forward the register.
      * @returns {Observable<any>}
      * @memberof UserService
      */
-    register(credentials: any): Observable<any> {
+    register(credentials: any): Observable<User> {
         return this.apiService.post('/api/user', credentials);
     }
 
