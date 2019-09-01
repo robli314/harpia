@@ -11,6 +11,8 @@ import { JwtService } from './jwt.service';
 export class UserService {
 
     private currentUserSubject = new BehaviorSubject<User>({} as User);
+
+    // A value will be emitted only when the current value is different from the last one.
     public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
 
     private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
@@ -19,28 +21,26 @@ export class UserService {
     constructor(private apiService: ApiService,
         private jwtService: JwtService) { }
 
+    register(credentials: any): Observable<any> {
+        return this.apiService.post('/api/user', credentials);
+    }
+
     /**
-     *  It calls the rest service to attempt the authentication (sign in or sign up)
-     *  using the credentials passed. It's up to this function to decided
-     *  if it is a sign in or sign up based on the parameter authType passed.
+     *  It calls the rest service to attempt the authentication
+     *  using the credentials passed.
      * 
-     * @param {String} authType - The type of authentication (login or register)
      * @param {*} credentials - The information needed to forward the authentication.
      * @returns {Observable<User>} - The return, an Observable of User.
      * @memberof UserService
      */
-    authenticate(authType: String, credentials: any): Observable<User> {
-        if (authType === 'login') {
-            return this.apiService.post('/auth/local', credentials).pipe(flatMap(data => {
-                this.jwtService.saveToken(data.token);
-                return this.apiService.get('/api/user/me').pipe(map(user => {
-                    this.setAuth(user);
-                    return this.getCurrentUser();
-                }));
+    authenticate(credentials: any): Observable<User> {
+        return this.apiService.post('/auth/local', credentials).pipe(flatMap(data => {
+            this.jwtService.saveToken(data.token);
+            return this.apiService.get('/api/user/me').pipe(map(user => {
+                this.setAuth(user);
+                return this.getCurrentUser();
             }));
-        } else {
-
-        }
+        }));
     }
 
     /**

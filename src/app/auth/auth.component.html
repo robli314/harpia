@@ -13,6 +13,16 @@
                 <mat-icon matSuffix>account_box</mat-icon>
             </mat-form-field>
             <mat-form-field appearance="outline" *ngIf="authType === 'register'">
+                <mat-label>Name</mat-label>
+                <input matInput id="iptName" placeholder="Name" formControlName="name">
+                <mat-icon matSuffix>account_box</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="authType === 'register'">
+                <mat-label>Last Name</mat-label>
+                <input matInput id="iptLastName" placeholder="Last Name" formControlName="lastName">
+                <mat-icon matSuffix>account_box</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="authType === 'register'">
                 <mat-label>E-Mail</mat-label>
                 <input matInput id="iptEmail" placeholder="E-Mail" type="email" formControlName="email">
                 <mat-icon matSuffix>email</mat-icon>

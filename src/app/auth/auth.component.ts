@@ -33,7 +33,30 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmitForm(): void {
-    this.userService.authenticate(this.authType, {
+    if (this.authType === 'login') {
+      this.login();
+    } else {
+      this.register();
+    }
+  }
+
+  register() {
+    this.userService.register({
+      'username': this.authForm.value.username,
+      'name': this.authForm.value.name,
+      'lastName': this.authForm.value.lastName,
+      'password': this.authForm.value.passwordInfo.password,
+      'email': this.authForm.value.email
+    }).subscribe(user => {
+      this.router.navigateByUrl('/login');
+    },
+      err => {
+        this.errors = { errors: { 'Error:': err.message } };
+      });
+  }
+
+  login(): void {
+    this.userService.authenticate({
       'username': this.authForm.value.username,
       'password': this.authForm.value.passwordInfo.password,
       'email': this.authForm.value.email
@@ -72,6 +95,8 @@ export class AuthComponent implements OnInit {
       case 'register': {
         formGroup = this.fb.group({
           'username': new FormControl('', Validators.required),
+          'name': new FormControl('', Validators.required),
+          'lastName': new FormControl('', Validators.required),
           'email': new FormControl('', [Validators.required, Validators.email]),
           'passwordInfo': this.fb.group({
             'password': new FormControl('', Validators.required),
