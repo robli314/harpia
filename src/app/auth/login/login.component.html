@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-card-title>
+        {{title}}
+    </mat-card-title>
+    <mat-card-header>
+        <hp-list-errors [errors]="errors"></hp-list-errors>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmitForm()">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput id="iptUsername" placeholder="Username" formControlName="username">
+                <mat-icon matSuffix>account_box</mat-icon>
+            </mat-form-field>
+            <div formGroupName="passwordInfo">
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput id="iptPassword" placeholder="Password" type="password" formControlName="password">
+                    <mat-icon matSuffix>vpn_key</mat-icon>
+                </mat-form-field>
+            </div>
+            <button class="button full-width" mat-raised-button color="primary"
+                [disabled]="!loginForm.valid">{{ title }}</button>
+        </form>
+    </mat-card-content>
+    <mat-card-footer>
+        <p>
+            <a [routerLink]="['/register']">Need an account?</a>
+        </p>
+    </mat-card-footer>
+</mat-card>

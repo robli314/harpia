@@ -21,6 +21,13 @@ export class UserService {
     constructor(private apiService: ApiService,
         private jwtService: JwtService) { }
 
+    /**
+     *
+     *
+     * @param {*} credentials - The information need to forward the register.
+     * @returns {Observable<any>}
+     * @memberof UserService
+     */
     register(credentials: any): Observable<any> {
         return this.apiService.post('/api/user', credentials);
     }
