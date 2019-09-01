@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
-import { distinctUntilChanged, flatMap } from 'rxjs/operators';
+import { distinctUntilChanged, flatMap, map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
@@ -21,7 +21,7 @@ export class UserService {
 
     /**
      *  It calls the rest service to attempt the authentication (sign in or sign up)
-     *  using the credentials passed. It's up to the rest service to decided
+     *  using the credentials passed. It's up to this function to decided
      *  if it is a sign in or sign up based on the parameter authType passed.
      * 
      * @param {String} authType - The type of authentication (login or register)
@@ -30,10 +30,17 @@ export class UserService {
      * @memberof UserService
      */
     authenticate(authType: String, credentials: any): Observable<User> {
-        return this.apiService.post('/auth/local', credentials).pipe(flatMap(data => {
-            this.jwtService.saveToken(data.token);
-            return this.apiService.get('/api/user/me');
-        }));
+        if (authType === 'login') {
+            return this.apiService.post('/auth/local', credentials).pipe(flatMap(data => {
+                this.jwtService.saveToken(data.token);
+                return this.apiService.get('/api/user/me').pipe(map(user => {
+                    this.setAuth(user);
+                    return this.getCurrentUser();
+                }));
+            }));
+        } else {
+
+        }
     }
 
     /**
@@ -45,6 +52,15 @@ export class UserService {
     setAuth(user: User): void {
         this.currentUserSubject.next(user);
         this.isAuthenticatedSubject.next(true);
+    }
+
+    /**
+     * It returns the current user logged in.
+     * @returns {User} - The user logged in.
+     * @memberof UserService
+     */
+    getCurrentUser(): User {
+        return this.currentUserSubject.value;
     }
 
 }
