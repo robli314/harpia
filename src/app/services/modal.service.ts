@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ModalAlertData } from '../models/modal-alert.model';
+import { AlertType, ModalAlertData } from '../models/modal-alert.model';
 import { ModalAlertComponent } from '../shared/modal-alert/modal-alert.component';
 
 @Injectable({
@@ -12,7 +12,16 @@ export class ModalService {
 
     constructor(public dialog: MatDialog) { }
 
-    openModal(data: ModalAlertData): any {
+    openErrorModal(message: string): any {
+
+        // create error modal data
+        let data = new ModalAlertData({
+            title: 'ERROR',
+            content: message,
+            closeButtonLabel: 'Close',
+            alertType: AlertType.ERROR
+        })
+
         if (this.isDialogOpen) {
             return false;
         }

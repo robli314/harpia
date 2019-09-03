@@ -2,7 +2,6 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { AlertType, ModalAlertData } from '../models/modal-alert.model';
 import { ModalService } from '../services/modal.service';
 
 
@@ -52,15 +51,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     message = `Error Code: ${error.status}\nMessage: ${error.error.message.errmsg}` :
                     message = `Message: ${error.error.message}`;
 
-                // create error modal data
-                let data = new ModalAlertData({
-                    title: 'ERROR',
-                    content: message,
-                    closeButtonLabel: 'Close',
-                    alertType: AlertType.ERROR
-                })
-
-                this.modalService.openModal(data);
+                this.modalService.openErrorModal(message);
 
                 return throwError(error);
             }));
