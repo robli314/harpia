@@ -5,11 +5,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
-import { TokenInterceptor } from './helpers/token.interceptor';
+import { HttpConfigInterceptor } from './interceptors/http-config.interceptor';
+import { NotificationDialogComponent } from './shared/notification-dialog/notification-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent
+  ],
+  entryComponents: [
+    NotificationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +23,7 @@ import { TokenInterceptor } from './helpers/token.interceptor';
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
+    useClass: HttpConfigInterceptor,
     multi: true
   }],
   bootstrap: [AppComponent]

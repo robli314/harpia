@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatSidenavModule, MatSlideToggleModule, MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
+import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -34,7 +35,7 @@ const MATERIAL_MODULES = [
  * @class SharedModule
  */
 @NgModule({
-  declarations: [],
+  declarations: [NotificationDialogComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
