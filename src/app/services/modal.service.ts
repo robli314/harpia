@@ -1,28 +1,25 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { NotificationDialogComponent } from '../shared/notification-dialog/notification-dialog.component';
+import { ModalAlertData } from '../models/modal-alert.model';
+import { ModalAlertComponent } from '../shared/modal-alert/modal-alert.component';
 
 @Injectable({
     providedIn: 'root'
 })
-export class NotificationMessageService {
+export class ModalService {
 
     public isDialogOpen: Boolean = false;
 
     constructor(public dialog: MatDialog) { }
 
-    openErrorDialog(data): any {
+    openModal(data: ModalAlertData): any {
         if (this.isDialogOpen) {
             return false;
         }
 
-        // set error configuration data
-        data['type'] = 'error';
-        data['title'] = 'ERROR';
-
         this.isDialogOpen = true;
 
-        const dialogRef = this.dialog.open(NotificationDialogComponent, {
+        const dialogRef = this.dialog.open(ModalAlertComponent, {
             width: '300px',
             data: data
         });

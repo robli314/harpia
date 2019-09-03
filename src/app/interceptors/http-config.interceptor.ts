@@ -2,13 +2,14 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { NotificationMessageService } from '../services/notification-dialog.service';
+import { AlertType, ModalAlertData } from '../models/modal-alert.model';
+import { ModalService } from '../services/modal.service';
 
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
 
-    constructor(private notificationMessageService: NotificationMessageService) { }
+    constructor(private modalService: ModalService) { }
 
     /**
      * The JWT token is retrieved from the localStorage, in case there is one valid token, then token is 
@@ -45,12 +46,22 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 return event;
             }),
             catchError((error: HttpErrorResponse) => {
-                let data = {};
-                error.error.message instanceof Object ?
-                    data['message'] = `Error Code: ${error.status}\nMessage: ${error.error.message.errmsg}` :
-                    data['message'] = `Message: ${error.error.message}`;
+                let message = '';
 
-                this.notificationMessageService.openErrorDialog(data);
+                error.error.message instanceof Object ?
+                    message = `Error Code: ${error.status}\nMessage: ${error.error.message.errmsg}` :
+                    message = `Message: ${error.error.message}`;
+
+                // create error modal data
+                let data = new ModalAlertData({
+                    title: 'ERROR',
+                    content: message,
+                    closeButtonLabel: 'Close',
+                    alertType: AlertType.ERROR
+                })
+
+                this.modalService.openModal(data);
+
                 return throwError(error);
             }));
     }

@@ -6,14 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { HttpConfigInterceptor } from './interceptors/http-config.interceptor';
-import { NotificationDialogComponent } from './shared/notification-dialog/notification-dialog.component';
+import { ModalAlertComponent } from './shared/modal-alert/modal-alert.component';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   entryComponents: [
-    NotificationDialogComponent
+    ModalAlertComponent
   ],
   imports: [
     BrowserModule,
