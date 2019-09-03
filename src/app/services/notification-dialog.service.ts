@@ -11,10 +11,15 @@ export class NotificationMessageService {
 
     constructor(public dialog: MatDialog) { }
 
-    openDialog(data): any {
+    openErrorDialog(data): any {
         if (this.isDialogOpen) {
             return false;
         }
+
+        // set error configuration data
+        data['type'] = 'error';
+        data['title'] = 'ERROR';
+
         this.isDialogOpen = true;
 
         const dialogRef = this.dialog.open(NotificationDialogComponent, {

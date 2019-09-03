@@ -1,8 +1,11 @@
-.mat-dialog-actions {
-    display: grid;
+mat-icon {
+    vertical-align: middle;
 }
 
-.mat-dialog-title {
-    color: #f44336;
-    text-align: center;
+mat-divider {
+    margin-top: 20px;
+}
+
+.content-error {
+    color: #D32D27;
 }

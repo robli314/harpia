@@ -24,14 +24,17 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const token = localStorage.getItem('jwtToken');
 
+        // set authorization token
         if (token) {
             request = request.clone({ headers: request.headers.set('Authorization', token) });
         }
 
+        // set Content-Type
         if (!request.headers.has('Content-Type')) {
             request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
         }
 
+        // set Accept
         request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
 
         return next.handle(request).pipe(
@@ -43,14 +46,11 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             }),
             catchError((error: HttpErrorResponse) => {
                 let data = {};
-                let reason = error && error.error.message instanceof Object ?
-                    error.error.message.errmsg : error.error.message;
-                data = {
-                    message: reason,
-                    status: error.status,
-                    type: 'error'
-                };
-                this.notificationMessageService.openDialog(data);
+                error.error.message instanceof Object ?
+                    data['message'] = `Error Code: ${error.status}\nMessage: ${error.error.message.errmsg}` :
+                    data['message'] = `Message: ${error.error.message}`;
+
+                this.notificationMessageService.openErrorDialog(data);
                 return throwError(error);
             }));
     }

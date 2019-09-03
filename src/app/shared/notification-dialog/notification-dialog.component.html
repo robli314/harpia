@@ -1,13 +1,12 @@
-<div mat-dialog-content>
-    <div *ngIf="data.type === 'error'">
-        <mat-error>
-            Reason: {{data.message}}
-        </mat-error>
-        <mat-error>
-            Status: {{data.status}}
-        </mat-error>
+<h2 mat-dialog-title>{{data.title}}</h2>
+<mat-dialog-content [ngClass]="getContentClass()">
+    <div>
+        <mat-icon>{{data.type}}</mat-icon>{{data.message}}
     </div>
-</div>
-<div mat-dialog-actions>
-    <button class="button" (click)="onClose()" mat-raised-button color="primary">Ok</button>
-</div>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="center">
+    <button (click)="onClose()" mat-raised-button color="primary" mat-dialog-close>
+        Close
+    </button>
+</mat-dialog-actions>
