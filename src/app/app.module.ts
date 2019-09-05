@@ -1,10 +1,12 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { ErrorModule } from './error/error.module';
+import { CustomErrorClientHandler } from './helpers/custom-error-client-handler';
 import { HttpConfigInterceptor } from './interceptors/http-config.interceptor';
 import { ModalAlertComponent } from './shared/modal-alert/modal-alert.component';
 
@@ -19,12 +21,17 @@ import { ModalAlertComponent } from './shared/modal-alert/modal-alert.component'
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    ErrorModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: HttpConfigInterceptor,
     multi: true
+  },
+  {
+    provide: ErrorHandler,
+    useClass: CustomErrorClientHandler
   }],
   bootstrap: [AppComponent]
 })

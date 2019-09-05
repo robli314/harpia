@@ -32,6 +32,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitForm(): void {
+
+    throw Error('Test');
+
     this.userService.authenticate({
       'username': this.loginForm.value.username,
       'password': this.loginForm.value.passwordInfo.password,
