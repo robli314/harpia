@@ -12,12 +12,14 @@ export class ModalService {
 
     constructor(public dialog: MatDialog) { }
 
-    openErrorModal(message: string): any {
+    openErrorModal(status: number, name: string, message: string): any {
 
         // create error modal data
         let data = new ModalAlertData({
             title: 'ERROR',
-            content: message,
+            status: status,
+            name: name,
+            message: message,
             closeButtonLabel: 'Close',
             alertType: AlertType.ERROR
         })

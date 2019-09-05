@@ -1,8 +1,16 @@
-<h2 mat-dialog-title>{{data.title}}</h2>
+<h2 mat-dialog-title>
+    <mat-icon>{{getAlertIcon(data.alertType)}}</mat-icon><span>{{data.title}}</span>
+</h2>
 <mat-dialog-content [ngClass]="getContentClass(data.alertType)">
-    <div>
-        <mat-icon>{{getAlertIcon(data.alertType)}}</mat-icon>{{data.content}}
-    </div>
+    <p>
+        <span>Status:</span> {{data.status}}
+    </p>
+    <p>
+        <span>Name:</span> {{data.name}}
+    </p>
+    <p>
+        <span>Message:</span> {{data.message}}
+    </p>
 </mat-dialog-content>
 <mat-divider></mat-divider>
 <mat-dialog-actions align="center">

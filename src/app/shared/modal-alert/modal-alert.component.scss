@@ -2,6 +2,15 @@ mat-icon {
     vertical-align: middle;
 }
 
+.mat-dialog-title {
+    color: #D32D27;
+
+    span {
+        position: relative;
+        top: 3px;
+    }
+}
+
 mat-divider {
     margin-top: 20px;
 }

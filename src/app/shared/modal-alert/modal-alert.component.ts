@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AlertType, ModalAlertData } from 'src/app/models/modal-alert.model';
 
@@ -6,17 +6,17 @@ import { AlertType, ModalAlertData } from 'src/app/models/modal-alert.model';
   templateUrl: './modal-alert.component.html',
   styleUrls: ['./modal-alert.component.scss']
 })
-export class ModalAlertComponent {
+export class ModalAlertComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalAlertData,
     public dialogRef: MatDialogRef<ModalAlertComponent>) { }
 
   onClose(): void {
-    this.dialogRef.close('Pizza!');
+    this.dialogRef.close('');
   }
 
   /**
-   * It return the modal content class based on the alert type.
+   * It returns the modal content class based on the alert type.
    * 
    * @param {AlertType} type
    * @returns {string}
@@ -32,7 +32,7 @@ export class ModalAlertComponent {
   }
 
   /**
-   * Get the icon to be used on the modal based on the alert type.
+   * Gets the icon to be used on the modal based on the alert type.
    *
    * @param {AlertType} type
    * @returns {string}
@@ -44,5 +44,9 @@ export class ModalAlertComponent {
       case AlertType.WARNING: return 'warning';
       case AlertType.ERROR: return 'error';
     }
+  }
+
+  ngOnInit(): void {
+
   }
 }

@@ -48,10 +48,10 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 let message = '';
 
                 error.error.message instanceof Object ?
-                    message = `Error Code: ${error.status}\nMessage: ${error.error.message.errmsg}` :
-                    message = `Message: ${error.error.message}`;
+                    message = error.error.message.errmsg :
+                    message = error.error.message;
 
-                this.modalService.openErrorModal(message);
+                this.modalService.openErrorModal(error.status, error.name, message);
 
                 return throwError(error);
             }));
