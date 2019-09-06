@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { ErrorModule } from './error/error.module';
 import { CustomErrorClientHandler } from './helpers/custom-error-client-handler';
 import { HttpConfigInterceptor } from './interceptors/http-config.interceptor';
-import { ModalAlertComponent } from './shared/modal-alert/modal-alert.component';
+import { ModalAlertComponent } from './shared/components/modal-alert/modal-alert.component';
 
 @NgModule({
   declarations: [

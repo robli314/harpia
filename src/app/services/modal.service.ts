@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AlertType, ModalAlertData } from '../models/modal-alert.model';
-import { ModalAlertComponent } from '../shared/modal-alert/modal-alert.component';
+import { ModalAlertComponent } from '../shared/components/modal-alert/modal-alert.component';
 
 @Injectable({
     providedIn: 'root'

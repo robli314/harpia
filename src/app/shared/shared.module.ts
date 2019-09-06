@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatSidenavModule, MatSlideToggleModule, MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
-import { ModalAlertComponent } from './modal-alert/modal-alert.component';
+import { ModalAlertComponent } from './components/modal-alert/modal-alert.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
