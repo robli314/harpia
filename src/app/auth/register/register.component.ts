@@ -53,13 +53,11 @@ export class RegisterComponent implements OnInit {
   /**
    * Validation function responsible for validating the insertion of new password, basically the function
    * checks if password and confirmPassword are the same, and return a ValidationErrors object accordingly.
-   * @param {FormGroup} - FormGroup to to be validated.
-   * @returns {ValidationErrors} - The validation error object.
+   * @param {FormGroup} - FormGroup to be validated.
+   * @returns {ValidationErrors} - The map of errors.
    * @memberof RegisterComponent
    */
   checkPasswords(group: FormGroup): ValidationErrors {
-    let password = group.get('password').value;;
-    let confirmPassword = group.get('confirmPassword').value;
-    return password === confirmPassword ? null : { notSame: true }
+    return group.get('password').value === group.get('confirmPassword').value ? null : { notSame: true }
   }
 }
