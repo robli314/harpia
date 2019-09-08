@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomErrorStateMatcher } from 'src/app/helpers/custom-error-state.matcher';
 import { UserService } from 'src/app/services/user.service';
@@ -24,9 +24,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.title = 'Sign In';
     this.loginForm = this.fb.group({
-      'username': new FormControl('', Validators.required),
+      'username': ['', [Validators.required]],
       'passwordInfo': this.fb.group({
-        'password': new FormControl('', Validators.required),
+        'password': ['', [Validators.required]],
       })
     });
   }

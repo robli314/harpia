@@ -22,6 +22,12 @@ export class HttpConfigInterceptor implements HttpInterceptor {
      * @memberof TokenInterceptor
      */
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+        // in case of no internet connection
+        if (!window.navigator.onLine) {
+            return Observable.throw(new HttpErrorResponse({ error: 'Internet is required.' }));
+        }
+
         const token = localStorage.getItem('jwtToken');
 
         // set authorization token
@@ -50,6 +56,11 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 error.error.message instanceof Object ?
                     message = error.error.message.errmsg :
                     message = error.error.message;
+
+                // server is not reachable
+                if (error.status === 0) {
+                    message = 'Server cannot be reached.'
+                }
 
                 this.modalService.openErrorModal(error.status, error.name, message);
 

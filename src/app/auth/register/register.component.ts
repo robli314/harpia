@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { CustomErrorStateMatcher } from 'src/app/helpers/custom-error-state.matcher';
@@ -25,13 +25,13 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.title = 'Sign Up';
     this.registerForm = this.fb.group({
-      'username': new FormControl('', Validators.required),
-      'name': new FormControl('', Validators.required),
-      'lastName': new FormControl('', Validators.required),
-      'email': new FormControl('', [Validators.required, Validators.email]),
+      'username': ['', [Validators.required]],
+      'name': ['', [Validators.required]],
+      'lastName': ['', [Validators.required]],
+      'email': ['', [Validators.required, Validators.email]],
       'passwordInfo': this.fb.group({
-        'password': new FormControl('', Validators.required),
-        'confirmPassword': new FormControl('')
+        'password': ['', [Validators.required]],
+        'confirmPassword': ['']
       }, { validators: this.checkPasswords })
     });
   }

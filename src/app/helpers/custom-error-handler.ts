@@ -8,8 +8,11 @@ export class CustomErrorHandler implements ErrorHandler {
     // I need to use the injector because the ErrorHandler is created before the providers.
     constructor(private injector: Injector) { }
     handleError(error: Error | HttpErrorResponse) {
-        const modalService = this.injector.get(ModalService);
-        modalService.openErrorModal(null, error.name, error.message);
+        // I do not need to treat server errors here, they are already being handler by interceptor.
+        if (!(error instanceof HttpErrorResponse)) {
+            const modalService = this.injector.get(ModalService);
+            modalService.openErrorModal(null, error.name, error.message);
+        }
         // I log the error anyway
         console.error(error);
     }
