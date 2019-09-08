@@ -23,11 +23,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
      */
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        // in case of no internet connection
-        if (!window.navigator.onLine) {
-            return Observable.throw(new HttpErrorResponse({ error: 'Internet is required.' }));
-        }
-
         const token = localStorage.getItem('jwtToken');
 
         // set authorization token
@@ -67,6 +62,5 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 return throwError(error);
             }));
     }
-
 }
 
