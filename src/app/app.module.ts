@@ -15,7 +15,11 @@ import { HttpConfigInterceptor } from './interceptors/http-config.interceptor';
     AppComponent
   ],
   entryComponents: [
-    ModalAlertComponent
+    ModalAlertComponent /* The MatDialog instantiates components at runtime, 
+    so the Angular compiler needs extra information, in order to create the 
+    necessary ComponentyFactory for the dialog content. Therefore, we must 
+    include the component class in the list of entryComponents, so the 
+    Angular compiler knows how to create the ComponentFactory for it. */
   ],
   imports: [
     BrowserModule,
