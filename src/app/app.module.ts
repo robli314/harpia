@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { CustomErrorHandler } from './helpers/custom-error-handler';
 import { HttpConfigInterceptor } from './interceptors/http-config.interceptor';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HttpConfigInterceptor } from './interceptors/http-config.interceptor';
     BrowserAnimationsModule,
     AppRoutingModule,
     AuthModule,
-    AlertModule
+    AlertModule,
+    PagesModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
