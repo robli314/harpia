@@ -5,21 +5,28 @@ import { User } from '../models/user.model';
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 
+
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    private currentUserSubject = new BehaviorSubject<User>({} as User);
+    // the BehaviorSubject stores the current value, so we can get always the latest emitted value
+    // the value will be send to the subscribers even they subscribe much later than the value was emitted
+    private currentUserSubject: BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
 
     // A value will be emitted only when the current value is different from the last one.
-    public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
+    public currentUser: Observable<User> = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
 
-    private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
-    public isAuthenticated = this.isAuthenticatedSubject.asObservable();
+    // it will be emitting the last one value
+    private isAuthenticatedSubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+
+    public isAuthenticated: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
 
     constructor(private apiService: ApiService,
-        private jwtService: JwtService) { }
+        private jwtService: JwtService) {
+        this.isAuthenticatedSubject.next(false);
+    }
 
     /**
      * It registers a new user.

@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
     path: 'pages',
-    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule), // dynamically loading
-    canActivate: [AuthGuard]
+    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) // dynamically loading
   },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
+  { path: '', redirectTo: '/pages', pathMatch: 'full' },
 ];
 
 @NgModule({

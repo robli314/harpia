@@ -16,28 +16,28 @@ export class LoginComponent implements OnInit {
   matcher = new CustomErrorStateMatcher;
 
   constructor(
-    private router: Router,
-    private fb: FormBuilder,
-    private userService: UserService) {
+    private _router: Router,
+    private _fb: FormBuilder,
+    private _userService: UserService) {
   }
 
   ngOnInit(): void {
     this.title = 'Sign In';
-    this.loginForm = this.fb.group({
+    this.loginForm = this._fb.group({
       'username': ['', [Validators.required]],
-      'passwordInfo': this.fb.group({
+      'passwordInfo': this._fb.group({
         'password': ['', [Validators.required]],
       })
     });
   }
 
   onSubmitForm(): void {
-    this.userService.authenticate({
+    this._userService.authenticate({
       'username': this.loginForm.value.username,
       'password': this.loginForm.value.passwordInfo.password,
       'email': this.loginForm.value.email
     }).subscribe(user => {
-      this.router.navigateByUrl('/');
+      this._router.navigateByUrl('/');
     });
   }
 }
