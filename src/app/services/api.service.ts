@@ -9,26 +9,26 @@ import { environment } from 'src/environments/environment';
 })
 export class ApiService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private _http: HttpClient) { }
 
     private formatErrors(error: any) {
         return throwError(error.error);
     }
 
     get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-        return this.http.get(`${environment.api_url}${path}`, { params })
+        return this._http.get(`${environment.api_url}${path}`, { params })
             .pipe(catchError(this.formatErrors));
     }
 
     put(path: string, body: Object = {}): Observable<any> {
-        return this.http.put(
+        return this._http.put(
             `${environment.api_url}${path}`,
             JSON.stringify(body)
         ).pipe(catchError(this.formatErrors));
     }
 
     post(path: string, body: Object = {}): Observable<any> {
-        return this.http.post(
+        return this._http.post(
             `${environment.api_url}${path}`,
             JSON.stringify(body),
             this.getDefaultHeaders()
@@ -36,7 +36,7 @@ export class ApiService {
     }
 
     delete(path): Observable<any> {
-        return this.http.delete(
+        return this._http.delete(
             `${environment.api_url}${path}`
         ).pipe(catchError(this.formatErrors));
     }

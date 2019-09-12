@@ -17,19 +17,19 @@ export class RegisterComponent implements OnInit {
   matcher = new CustomErrorStateMatcher;
 
   constructor(
-    private router: Router,
-    private fb: FormBuilder,
-    private userService: UserService) {
+    private _router: Router,
+    private _fb: FormBuilder,
+    private _userService: UserService) {
   }
 
   ngOnInit(): void {
     this.title = 'Sign Up';
-    this.registerForm = this.fb.group({
+    this.registerForm = this._fb.group({
       'username': ['', [Validators.required]],
       'name': ['', [Validators.required]],
       'lastName': ['', [Validators.required]],
       'email': ['', [Validators.required, Validators.email]],
-      'passwordInfo': this.fb.group({
+      'passwordInfo': this._fb.group({
         'password': ['', [Validators.required]],
         'confirmPassword': ['']
       }, { validators: this.checkPasswords })
@@ -37,16 +37,16 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmitForm(): void {
-    this.userService.register({
+    this._userService.register({
       'username': this.registerForm.value.username,
       'name': this.registerForm.value.name,
       'lastName': this.registerForm.value.lastName,
       'password': this.registerForm.value.passwordInfo.password,
       'email': this.registerForm.value.email
     }).pipe(map(user => {
-      return this.userService.authenticate(user);
+      return this._userService.authenticate(user);
     })).subscribe(data => {
-      this.router.navigateByUrl('/');
+      this._router.navigateByUrl('/');
     });
   }
 

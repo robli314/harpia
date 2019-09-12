@@ -9,14 +9,14 @@ export class PagesAuthResolver implements Resolve<boolean> {
     // It implements Resolver interface in order to cause 
     //  the component wait to render until the authentication data is retrieved.
     constructor(
-        private router: Router,
-        private userService: UserService
+        private _router: Router,
+        private _userService: UserService
     ) { }
 
     resolve(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<boolean> {
-        return this.userService.isAuthenticated.pipe(take(1));
+        return this._userService.isAuthenticated.pipe(take(1));
     }
 }

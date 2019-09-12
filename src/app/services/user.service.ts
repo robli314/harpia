@@ -23,7 +23,7 @@ export class UserService {
 
     public isAuthenticated: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
 
-    constructor(private apiService: ApiService,
+    constructor(private _apiService: ApiService,
         private jwtService: JwtService) {
         this.isAuthenticatedSubject.next(false);
     }
@@ -36,7 +36,7 @@ export class UserService {
      * @memberof UserService
      */
     register(credentials: any): Observable<User> {
-        return this.apiService.post('/api/user', credentials);
+        return this._apiService.post('/api/user', credentials);
     }
 
     /**
@@ -48,9 +48,9 @@ export class UserService {
      * @memberof UserService
      */
     authenticate(credentials: any): Observable<User> {
-        return this.apiService.post('/auth/local', credentials).pipe(flatMap(data => {
+        return this._apiService.post('/auth/local', credentials).pipe(flatMap(data => {
             this.jwtService.saveToken(data.token);
-            return this.apiService.get('/api/user/me').pipe(map(user => {
+            return this._apiService.get('/api/user/me').pipe(map(user => {
                 this.setAuth(user);
                 return this.getCurrentUser();
             }));

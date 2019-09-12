@@ -8,7 +8,7 @@ import { ModalService } from '../services/modal.service';
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
 
-    constructor(private modalService: ModalService) { }
+    constructor(private _modalService: ModalService) { }
 
     /**
      * The JWT token is retrieved from the localStorage, in case there is one valid token, then token is 
@@ -57,7 +57,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     message = 'Server cannot be reached.'
                 }
 
-                this.modalService.openErrorModal(error.status, error.name, message);
+                this._modalService.openErrorModal(error.status, error.name, message);
 
                 return throwError(error);
             }));
