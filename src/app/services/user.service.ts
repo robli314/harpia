@@ -16,12 +16,12 @@ export class UserService {
     private _currentUserSubject: BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
 
     // A value will be emitted only when the current value is different from the last one.
-    public currentUser: Observable<User> = this._currentUserSubject.asObservable().pipe(distinctUntilChanged());
+    currentUser: Observable<User> = this._currentUserSubject.asObservable().pipe(distinctUntilChanged());
 
     // it will be emitting the last one value
     private _isAuthenticatedSubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
-    public isAuthenticated: Observable<boolean> = this._isAuthenticatedSubject.asObservable();
+    isAuthenticated: Observable<boolean> = this._isAuthenticatedSubject.asObservable();
 
     constructor(private _apiService: ApiService,
         private _jwtService: JwtService) {
