@@ -77,4 +77,15 @@ export class UserService {
         return this.currentUserSubject.value;
     }
 
+    /**
+     * It removes the authentication and alerts subscribers.
+     *
+     * @memberof UserService
+     */
+    clearAuth(): void {
+        this.jwtService.destroyToken();
+        this.currentUserSubject.next({} as User);
+        this.isAuthenticatedSubject.next(false);
+    }
+
 }
