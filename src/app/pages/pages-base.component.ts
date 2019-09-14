@@ -1,19 +1,13 @@
-import { Injector } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 
-/**
- * 
- *  This component shares logic to be used inside of all pages.
- * 
- * @export
- * @class PagesBaseComponent
- */
-export class PagesBaseComponent {
+@Component({})
+export class PagesBaseComponent implements OnInit {
 
     constructor(private _injector: Injector) { }
 
-    public checkAuthentication(): void {
+    ngOnInit() {
         this._injector.get(UserService).isAuthenticated.subscribe(
             (authenticated) => {
                 if (!authenticated) {

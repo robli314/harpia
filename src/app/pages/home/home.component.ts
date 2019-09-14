@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { PagesBaseComponent } from '../pages-base.component';
 
 @Component({
@@ -6,14 +6,10 @@ import { PagesBaseComponent } from '../pages-base.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent extends PagesBaseComponent implements OnInit {
+export class HomeComponent extends PagesBaseComponent {
 
-  constructor(public injector: Injector) {
+  constructor(injector: Injector) {
     super(injector);
-  }
-
-  ngOnInit() {
-    super.checkAuthentication();
   }
 
 }
