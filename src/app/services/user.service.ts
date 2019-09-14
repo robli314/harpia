@@ -13,19 +13,19 @@ export class UserService {
 
     // the BehaviorSubject stores the current value, so we can get always the latest emitted value
     // the value will be send to the subscribers even they subscribe much later than the value was emitted
-    private currentUserSubject: BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
+    private _currentUserSubject: BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
 
     // A value will be emitted only when the current value is different from the last one.
-    public currentUser: Observable<User> = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
+    public currentUser: Observable<User> = this._currentUserSubject.asObservable().pipe(distinctUntilChanged());
 
     // it will be emitting the last one value
-    private isAuthenticatedSubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+    private _isAuthenticatedSubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
-    public isAuthenticated: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
+    public isAuthenticated: Observable<boolean> = this._isAuthenticatedSubject.asObservable();
 
     constructor(private _apiService: ApiService,
-        private jwtService: JwtService) {
-        this.isAuthenticatedSubject.next(false);
+        private _jwtService: JwtService) {
+        this._isAuthenticatedSubject.next(false);
     }
 
     /**
@@ -49,9 +49,9 @@ export class UserService {
      */
     authenticate(credentials: any): Observable<User> {
         return this._apiService.post('/auth/local', credentials).pipe(flatMap(data => {
-            this.jwtService.saveToken(data.token);
+            this._jwtService.saveToken(data.token);
             return this._apiService.get('/api/user/me').pipe(map(user => {
-                this.setAuth(user);
+                this.setAuthentication(user);
                 return this.getCurrentUser();
             }));
         }));
@@ -63,9 +63,9 @@ export class UserService {
      * @param {User} user
      * @memberof UserService
      */
-    setAuth(user: User): void {
-        this.currentUserSubject.next(user);
-        this.isAuthenticatedSubject.next(true);
+    private setAuthentication(user: User): void {
+        this._currentUserSubject.next(user);
+        this._isAuthenticatedSubject.next(true);
     }
 
     /**
@@ -74,7 +74,7 @@ export class UserService {
      * @memberof UserService
      */
     getCurrentUser(): User {
-        return this.currentUserSubject.value;
+        return this._currentUserSubject.value;
     }
 
     /**
@@ -82,10 +82,10 @@ export class UserService {
      *
      * @memberof UserService
      */
-    clearAuth(): void {
-        this.jwtService.destroyToken();
-        this.currentUserSubject.next({} as User);
-        this.isAuthenticatedSubject.next(false);
+    clearAuthentication(): void {
+        this._jwtService.destroyToken();
+        this._currentUserSubject.next({} as User);
+        this._isAuthenticatedSubject.next(false);
     }
 
 }
