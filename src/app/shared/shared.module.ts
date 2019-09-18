@@ -1,10 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatSidenavModule, MatSlideToggleModule, MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatSidenavModule, MatSlideToggleModule, MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
+import { RouterModule } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -24,7 +28,8 @@ const MATERIAL_MODULES = [
   MatSidenavModule,
   MatListModule,
   MatChipsModule,
-  MatTabsModule
+  MatTabsModule,
+  MatMenuModule
 ]
 
 /**
@@ -35,19 +40,23 @@ const MATERIAL_MODULES = [
  * @class SharedModule
  */
 @NgModule({
-  declarations: [FooterComponent],
+  declarations: [FooterComponent, ToolbarComponent, SidebarComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule,
+    FlexLayoutModule,
     ...MATERIAL_MODULES
   ],
   exports: [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule,
+    FlexLayoutModule,
     ...MATERIAL_MODULES,
-    FooterComponent
+    FooterComponent, ToolbarComponent, SidebarComponent
   ]
 })
 export class SharedModule { }

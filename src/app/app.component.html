@@ -1,3 +1,8 @@
 <ng-container>
-    <hp-default></hp-default>
+    <hp-default *ngIf="isAuthenticated | async; else logout">
+    </hp-default>
 </ng-container>
+
+<ng-template #logout>
+    <router-outlet></router-outlet>
+</ng-template>

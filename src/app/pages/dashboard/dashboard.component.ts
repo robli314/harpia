@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { PagesBaseComponent } from '../pages-base.component';
 
 @Component({
   selector: 'hp-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent extends PagesBaseComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(injector: Injector) {
+    super(injector);
   }
 
 }
