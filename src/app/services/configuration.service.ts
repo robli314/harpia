@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Language } from '../models/language.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ConfigurationService {
-    constructor() { }
 
-    getLanguages(): Observable<Language[]> {
+    private _selectedLanguageSubject: BehaviorSubject<Language>;
+
+    constructor() {
+        this._selectedLanguageSubject = new BehaviorSubject({
+            id: 'en',
+            title: 'English',
+            flag: 'us'
+        });
+    }
+
+    get languages(): Observable<Language[]> {
         return of([
             {
                 id: 'en',
@@ -16,18 +25,18 @@ export class ConfigurationService {
                 flag: 'us'
             },
             {
-                id: 'pt',
+                id: 'pt-br',
                 title: 'Portuguese',
-                flag: 'pt'
+                flag: 'pt-br'
             }
         ]);
     }
 
     getSelectedLanguage(): Observable<Language> {
-        return of({
-            id: 'en',
-            title: 'English',
-            flag: 'us'
-        });
+        return this._selectedLanguageSubject.asObservable();
+    }
+
+    setLanguage(language: Language) {
+        this._selectedLanguageSubject.next(language);
     }
 }
