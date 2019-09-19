@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { PagesAuthResolver } from './pages-auth.resolver';
 import { PagesRoutingModule } from './pages-routing.module';
 
 @NgModule({
@@ -10,6 +9,6 @@ import { PagesRoutingModule } from './pages-routing.module';
     PagesRoutingModule,
     SharedModule
   ],
-  providers: [PagesAuthResolver]
+  providers: []
 })
 export class PagesModule { }

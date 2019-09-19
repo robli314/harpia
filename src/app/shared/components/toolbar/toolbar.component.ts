@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Language } from 'src/app/models/language.model';
 import { ConfigurationService } from 'src/app/services/configuration.service';
@@ -15,7 +16,7 @@ export class ToolbarComponent implements OnInit {
   selectedLanguage: Language;
   languages: Observable<Language[]>;
 
-  constructor(private _configurationService: ConfigurationService, private _userService: UserService) {
+  constructor(private _configurationService: ConfigurationService, private _userService: UserService, private _router: Router) {
   }
 
   ngOnInit() {
