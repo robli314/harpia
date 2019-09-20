@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { distinctUntilChanged, flatMap, map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { ApiService } from './api.service';
@@ -26,6 +26,26 @@ export class UserService {
     constructor(private _apiService: ApiService,
         private _jwtService: JwtService) {
         this._isAuthenticatedSubject.next(false);
+    }
+
+    /**
+     * It checks the JWT token in localstorage with server & load user's information.
+     * It should runs once on application startup.
+     *
+     * @memberof UserService
+     */
+    populate(): Observable<boolean> {
+        // If JWT detected, attempt to get & store user's info
+        if (this._jwtService.getToken()) {
+            return this._apiService.get('/api/user/me').pipe(map(user => {
+                this.setAuthentication(user);
+                return true;
+            }));
+        } else {
+            // Remove any potential remnants of previous auth states
+            this.clearAuthentication();
+            return of(false);
+        }
     }
 
     /**

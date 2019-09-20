@@ -37,6 +37,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   logout() {
+    this._router.navigate(['/login']);
     this._userService.clearAuthentication();
   }
 }

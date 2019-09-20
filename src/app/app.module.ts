@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertModule } from './alert/alert.module';
@@ -11,6 +11,7 @@ import { CustomErrorHandler } from './helpers/custom-error-handler';
 import { HttpConfigInterceptor } from './interceptors/http-config.interceptor';
 import { LayoutModule } from './layout/layout.module';
 import { PagesModule } from './pages/pages.module';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,12 @@ import { PagesModule } from './pages/pages.module';
     provide: HTTP_INTERCEPTORS,
     useClass: HttpConfigInterceptor,
     multi: true
+  }, {
+    provide: APP_INITIALIZER,
+    useFactory: (userService: UserService) =>
+      () => userService.populate().toPromise(),
+    multi: true,
+    deps: [UserService]
   },
   {
     provide: ErrorHandler,

@@ -9,9 +9,7 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent implements OnInit {
   isAuthenticated: Observable<boolean>;
-  constructor(private _userService: UserService) {
-
-  }
+  constructor(private _userService: UserService) { }
 
   ngOnInit() {
     this.isAuthenticated = this._userService.isAuthenticated;
