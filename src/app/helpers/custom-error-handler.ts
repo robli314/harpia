@@ -14,6 +14,6 @@ export class CustomErrorHandler implements ErrorHandler {
             modalService.openErrorModal(null, error.name, error.message);
         }
         // I log the error anyway
-        console.error(error);
+        console.log(error);
     }
 }
