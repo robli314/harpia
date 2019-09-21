@@ -30,7 +30,7 @@ export class UserService {
 
     /**
      * It checks the JWT token in localstorage with server & load user's information.
-     * It should runs once on application startup.
+     * It should run once on application startup.
      *
      * @memberof UserService
      */

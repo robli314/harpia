@@ -52,9 +52,12 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     message = error.error.message.errmsg :
                     message = error.error.message;
 
-                // server is not reachable
-                if (error.status === 0) {
-                    message = 'Server cannot be reached.'
+                switch (error.status) {
+                    case 0:
+                        message = 'Server cannot be reached.';
+                        break;
+                    default:
+                        message = 'Sorry! Something went wrong.'
                 }
 
                 this._modalService.openErrorModal(error.status, error.name, message);
