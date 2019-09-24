@@ -1,13 +1,12 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ModalService } from '../services/modal.service';
 
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
 
-    constructor(private _modalService: ModalService) { }
+    constructor() { }
 
     /**
      * The JWT token is retrieved from the localStorage, in case there is one valid token, then token is 
