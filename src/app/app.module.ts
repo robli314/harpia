@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { CustomErrorHandler } from './helpers/custom-error-handler';
 import { HttpConfigInterceptor } from './interceptors/http-config.interceptor';
+import { HttpErrorHandlerInterceptor } from './interceptors/http-error-handler.interceptor';
 import { LayoutModule } from './layout/layout.module';
 import { PagesModule } from './pages/pages.module';
 import { UserService } from './services/user.service';
@@ -36,6 +37,10 @@ import { UserService } from './services/user.service';
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: HttpConfigInterceptor,
+    multi: true
+  }, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpErrorHandlerInterceptor,
     multi: true
   }, {
     provide: APP_INITIALIZER,
