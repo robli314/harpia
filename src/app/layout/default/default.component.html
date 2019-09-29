@@ -3,7 +3,8 @@
         <div id="container-2" class="container">
             <div id="container-3" class="container">
                 <!-- toolbar -->
-                <hp-toolbar></hp-toolbar>
+                <hp-toolbar [languages]="languages" [selectedLanguage]="selectedLanguage"
+                    (changeLanguage)="onChangeLanguage($event)" (clickLogout)="onLogout()"></hp-toolbar>
                 <!-- content -->
                 <router-outlet></router-outlet>
             </div>

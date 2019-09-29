@@ -4,7 +4,7 @@
 
         <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
 
-            <button mat-icon-button class="navbar-toggle-button" (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
+            <button mat-icon-button class="navbar-toggle-button" fxHide.gt-md>
                 <mat-icon class="secondary-text">menu</mat-icon>
             </button>
 
@@ -54,7 +54,6 @@
             <button mat-button fxHide fxShow.gt-xs class="language-button" [matMenuTriggerFor]="languageMenu">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="flag mr-8" [src]="getLanguageIcon(selectedLanguage.flag)">
-                    <span class="iso text-uppercase">{{selectedLanguage.id}}</span>
                 </div>
             </button>
 

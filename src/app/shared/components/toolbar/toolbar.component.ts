@@ -1,9 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Language } from 'src/app/models/language.model';
-import { ConfigurationService } from 'src/app/services/configuration.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'hp-toolbar',
@@ -13,19 +10,22 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ToolbarComponent implements OnInit {
 
+  @Input()
   selectedLanguage: Language;
+
+  @Input()
   languages: Observable<Language[]>;
 
-  constructor(private _configurationService: ConfigurationService, private _userService: UserService, private _router: Router) {
+  @Output()
+  changeLanguage: EventEmitter<Language> = new EventEmitter<Language>();
+
+  @Output()
+  clickLogout: EventEmitter<void> = new EventEmitter();
+
+  constructor() {
   }
 
   ngOnInit() {
-    this.languages = this._configurationService.languages;
-
-    this._configurationService.getSelectedLanguage().subscribe(selectedLanguage => {
-      this.selectedLanguage = selectedLanguage;
-    });
-
   }
 
   getLanguageIcon(flag: string): string {
@@ -33,11 +33,10 @@ export class ToolbarComponent implements OnInit {
   }
 
   setLanguage(language: Language) {
-    this._configurationService.setLanguage(language);
+    this.changeLanguage.emit(language);
   }
 
   logout() {
-    this._router.navigate(['/login']);
-    this._userService.clearAuthentication();
+    this.clickLogout.emit();
   }
 }

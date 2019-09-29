@@ -25,7 +25,7 @@ export class ConfigurationService {
                 flag: 'us'
             },
             {
-                id: 'pt-br',
+                id: 'pt',
                 title: 'Portuguese',
                 flag: 'pt-br'
             }
