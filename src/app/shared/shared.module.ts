@@ -52,7 +52,6 @@ const MATERIAL_MODULES = [
   exports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule,
     RouterModule,
     FlexLayoutModule,
     ...MATERIAL_MODULES,
