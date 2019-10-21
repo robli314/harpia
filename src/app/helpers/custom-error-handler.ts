@@ -8,6 +8,6 @@ export class CustomErrorHandler implements ErrorHandler {
     // I need to use the injector because the ErrorHandler is created before the providers.
     constructor(private _injector: Injector) { }
     handleError(error: Error | HttpErrorResponse) {
-        this._injector.get(LoggingService).logError(error.message, null);
+        this._injector.get(LoggingService).error(error);
     }
 }

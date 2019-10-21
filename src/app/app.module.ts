@@ -2,6 +2,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JL } from 'jsnlog';
 import { AlertModule } from './alert/alert.module';
 import { ModalAlertComponent } from './alert/modal-alert/modal-alert.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +14,25 @@ import { HttpErrorHandlerInterceptor } from './interceptors/http-error-handler.i
 import { LayoutModule } from './layout/layout.module';
 import { PagesModule } from './pages/pages.module';
 import { UserService } from './services/user.service';
+
+const logLevel = JL.getAllLevel();
+const appender = JL.createAjaxAppender('example appender');
+appender.setOptions({
+  'bufferSize': 20,
+  'storeInBufferLevel': 1000,
+  'level': logLevel,
+  'sendWithBufferLevel': 6000,
+  'url': 'http://localhost:8080/jsnlog.logger'
+});
+
+// Configure the JSNLog logging library.
+// See http://jsnlog.com/Documentation/JSNLogJs
+JL().setOptions({
+  'appenders': [appender],
+  'level': logLevel
+});
+
+JL().info('Angular is starting...');
 
 @NgModule({
   declarations: [
@@ -52,7 +72,7 @@ import { UserService } from './services/user.service';
   {
     provide: ErrorHandler,
     useClass: CustomErrorHandler
-  }],
+  }, { provide: 'JSNLOG', useValue: JL }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
