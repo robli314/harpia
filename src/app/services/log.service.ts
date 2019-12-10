@@ -8,34 +8,34 @@ export class LogService {
     logLevel: LogLevel = LogLevel.All;
     includeDateTime: boolean = true;
 
-    debug(msg: string, ...optionalParams: any[]) {
+    debug(msg: string, ...optionalParameters: any[]) {
         this.writeToLog(msg, LogLevel.Debug,
-            optionalParams);
+            optionalParameters);
     }
 
-    info(msg: string, ...optionalParams: any[]) {
+    info(msg: string, ...optionalParameters: any[]) {
         this.writeToLog(msg, LogLevel.Info,
-            optionalParams);
+            optionalParameters);
     }
 
-    warn(msg: string, ...optionalParams: any[]) {
+    warn(msg: string, ...optionalParameters: any[]) {
         this.writeToLog(msg, LogLevel.Warn,
-            optionalParams);
+            optionalParameters);
     }
 
-    error(msg: string, ...optionalParams: any[]) {
+    error(msg: string, ...optionalParameters: any[]) {
         this.writeToLog(msg, LogLevel.Error,
-            optionalParams);
+            optionalParameters);
     }
 
-    fatal(msg: string, ...optionalParams: any[]) {
+    fatal(msg: string, ...optionalParameters: any[]) {
         this.writeToLog(msg, LogLevel.Fatal,
-            optionalParams);
+            optionalParameters);
     }
 
-    log(msg: string, ...optionalParams: any[]) {
+    log(msg: string, ...optionalParameters: any[]) {
         this.writeToLog(msg, LogLevel.All,
-            optionalParams);
+            optionalParameters);
     }
 
     private shouldLog(logLevel: LogLevel): boolean {
@@ -45,13 +45,13 @@ export class LogService {
     }
 
     private writeToLog(msg: string,
-        level: LogLevel,
-        params: any[]) {
-        if (this.shouldLog(level)) {
+        logLevel: LogLevel,
+        parameters: any[]) {
+        if (this.shouldLog(logLevel)) {
             let entry: LogEntryHelper = new LogEntryHelper();
             entry.message = msg;
-            entry.level = level;
-            entry.extraInfo = params;
+            entry.logLevel = logLevel;
+            entry.extraInfo = parameters;
             entry.includeDateTime = this.includeDateTime;
             console.log(entry.buildLogString());
         }

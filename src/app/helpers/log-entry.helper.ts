@@ -11,34 +11,34 @@ export enum LogLevel {
 export class LogEntryHelper {
     entryDate: Date = new Date();
     message: string = "";
-    level: LogLevel = LogLevel.Debug;
+    logLevel: LogLevel = LogLevel.Debug;
     extraInfo: any[] = [];
     includeDateTime: boolean = true;
 
     buildLogString(): string {
-        let ret: string = "";
+        let result: string = "";
 
         if (this.includeDateTime) {
-            ret = new Date() + " - ";
+            result = new Date() + " - ";
         }
-        ret += "Type: " + LogLevel[this.level];
-        ret += " - Message: " + this.message;
+        result += "Type: " + LogLevel[this.logLevel];
+        result += " - Message: " + this.message;
         if (this.extraInfo.length) {
-            ret += " - Extra Info: "
+            result += " - Extra Info: "
                 + this.formatParams(this.extraInfo);
         }
 
-        return ret;
+        return result;
     }
 
-    private formatParams(params: any[]): string {
-        let ret: string = params.join(",");
-        if (params.some(p => typeof p == "object")) {
-            ret = "";
-            for (let item of params) {
-                ret += JSON.stringify(item) + ",";
+    private formatParams(parameters: any[]): string {
+        let result: string = parameters.join(",");
+        if (parameters.some(p => typeof p == "object")) {
+            result = "";
+            for (let parameter of parameters) {
+                result += JSON.stringify(parameter) + ",";
             }
         }
-        return ret;
+        return result;
     }
 }
