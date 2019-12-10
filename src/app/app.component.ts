@@ -1,5 +1,6 @@
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { LogService } from './services/log.service';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -9,9 +10,9 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent implements OnInit {
   isAuthenticated: Observable<boolean>;
-  constructor(private _userService: UserService,
+  constructor(private _userService: UserService, private _logService: LogService,
     @Inject(LOCALE_ID) private _locale: string) {
-    console.log(this._locale)
+    this._logService.log(this._locale);
   }
 
   ngOnInit() {
