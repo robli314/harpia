@@ -2,13 +2,14 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { LogService } from '../services/log.service';
 import { ModalService } from '../services/modal.service';
 
 
 @Injectable()
 export class HttpErrorHandlerInterceptor implements HttpInterceptor {
 
-    constructor(private _modalService: ModalService) { }
+    constructor(private _modalService: ModalService, private _logService: LogService) { }
 
     /**
      * The interceptor to handler all HttpErrorResponse.
@@ -23,7 +24,7 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    console.log('event--->>>', event);
+                    this._logService.debug('event--->>>', event);
                 }
                 return event;
             }),

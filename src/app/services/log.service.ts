@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { LogEntryHelper, LogLevel } from '../helpers/log-entry.helper';
+import { LogEntry, LogLevel } from '../helpers/log-entry';
+import { LogPublisherService } from './log-publisher.service';
 
 @Injectable({
     providedIn: 'root'
@@ -7,6 +8,9 @@ import { LogEntryHelper, LogLevel } from '../helpers/log-entry.helper';
 export class LogService {
     logLevel: LogLevel = LogLevel.All;
     includeDateTime: boolean = true;
+
+    constructor(private logPublisherService: LogPublisherService) {
+    }
 
     debug(msg: string, ...optionalParameters: any[]) {
         this.writeToLog(msg, LogLevel.Debug,
@@ -48,12 +52,14 @@ export class LogService {
         logLevel: LogLevel,
         parameters: any[]) {
         if (this.shouldLog(logLevel)) {
-            let entry: LogEntryHelper = new LogEntryHelper();
+            let entry: LogEntry = new LogEntry();
             entry.message = msg;
             entry.logLevel = logLevel;
             entry.extraInfo = parameters;
             entry.includeDateTime = this.includeDateTime;
-            console.log(entry.buildLogString());
+            this.logPublisherService.publishers.forEach(publisher => {
+                publisher.log(entry).subscribe(response => console.log(response));
+            });
         }
     }
 }

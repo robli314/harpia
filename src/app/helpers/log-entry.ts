@@ -8,7 +8,7 @@ export enum LogLevel {
     Off = 6
 }
 
-export class LogEntryHelper {
+export class LogEntry {
     entryDate: Date = new Date();
     message: string = "";
     logLevel: LogLevel = LogLevel.Debug;
