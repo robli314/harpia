@@ -9,7 +9,6 @@ export enum LogLevel {
 }
 
 export class LogEntry {
-    entryDate: Date = new Date();
     message: string = "";
     logLevel: LogLevel = LogLevel.Debug;
     extraInfo: any[] = [];
@@ -21,6 +20,7 @@ export class LogEntry {
         if (this.includeDateTime) {
             result = new Date() + " - ";
         }
+
         result += "Type: " + LogLevel[this.logLevel];
         result += " - Message: " + this.message;
         if (this.extraInfo.length) {
