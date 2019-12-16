@@ -9,22 +9,22 @@ export enum LogLevel {
 }
 
 export class LogEntry {
-    message: string = "";
+    message: string = '';
     logLevel: LogLevel = LogLevel.Debug;
     extraInfo: any[] = [];
     includeDateTime: boolean = true;
 
     buildLogString(): string {
-        let result: string = "";
+        let result: string = '';
 
         if (this.includeDateTime) {
-            result = new Date() + " - ";
+            result = new Date() + ' - ';
         }
 
-        result += "Type: " + LogLevel[this.logLevel];
-        result += " - Message: " + this.message;
+        result += 'Type: ' + LogLevel[this.logLevel];
+        result += ' - Message: ' + this.message;
         if (this.extraInfo.length) {
-            result += " - Extra Info: "
+            result += ' - Extra Info: '
                 + this.formatParams(this.extraInfo);
         }
 
@@ -32,11 +32,11 @@ export class LogEntry {
     }
 
     private formatParams(parameters: any[]): string {
-        let result: string = parameters.join(",");
-        if (parameters.some(p => typeof p == "object")) {
-            result = "";
+        let result: string = parameters.join(',');
+        if (parameters.some(p => typeof p == 'object')) {
+            result = '';
             for (let parameter of parameters) {
-                result += JSON.stringify(parameter) + ",";
+                result += JSON.stringify(parameter) + ',';
             }
         }
         return result;
