@@ -4,7 +4,6 @@ import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
 import { LogService } from './services/log.service';
 import { UserService } from './services/user.service';
-
 declare const require;
 const bowser = require('bowser'); // Javascript library to help detect what browser the user has.
 
