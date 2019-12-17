@@ -28,9 +28,6 @@ export class AppComponent implements OnInit {
     have DOM access, for instance on the server, in a web worker or native mobile.*/
     private _snackBar: MatSnackBar
   ) {
-    this._logService.debug('Locale', this._locale);
-    this._logService.debug('PlatformId', this._platformId);
-
     if (isPlatformBrowser(this._platformId)) {
       this._renderer.setAttribute(this._doc.documentElement, 'lang', _locale);
     }
@@ -54,17 +51,12 @@ export class AppComponent implements OnInit {
 
   checkBrowserFeatures() {
     let supported = true;
-
     for (const feature in Modernizr) {
       if (Modernizr.hasOwnProperty(feature) && typeof Modernizr[feature] === 'boolean' && Modernizr[feature] === false) {
+        this._logService.info('Not supported feature: ' + feature);
         supported = false;
       }
     }
-
-    if (!supported) {
-      this._snackBar.open('Update your browser', 'OK');
-    }
-
     return supported;
   }
 

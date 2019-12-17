@@ -58,7 +58,7 @@ export class LogService {
             entry.extraInfo = parameters;
             entry.includeDateTime = this.includeDateTime;
             this.logPublisherService.publishers.forEach(publisher => {
-                publisher.log(entry).subscribe(response => console.log(response));
+                publisher.log(entry).subscribe();
             });
         }
     }
