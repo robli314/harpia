@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
     this.isAuthenticated = this._userService.isAuthenticated;
   }
 
-  checkBrowser() {
+  private checkBrowser() {
     if (isPlatformBrowser(this._platformId)) {
       if (this.isBrowserValid()) {
         this.checkBrowserFeatures();
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  checkBrowserFeatures() {
+  private checkBrowserFeatures() {
     let supported = true;
     for (const feature in Modernizr) {
       if (Modernizr.hasOwnProperty(feature) && typeof Modernizr[feature] === 'boolean' && Modernizr[feature] === false) {

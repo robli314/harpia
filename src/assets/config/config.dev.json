@@ -1,0 +1,12 @@
+{
+    "env": {
+        "name": "dev"
+    },
+    "apiServer": {
+        "url": "http://localhost:8000"
+    },
+    "logging": {
+        "level": 2,
+        "console": true
+    }
+}

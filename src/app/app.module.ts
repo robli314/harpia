@@ -13,7 +13,14 @@ import { HttpConfigInterceptor } from './interceptors/http-config.interceptor';
 import { HttpErrorHandlerInterceptor } from './interceptors/http-error-handler.interceptor';
 import { LayoutModule } from './layout/layout.module';
 import { PagesModule } from './pages/pages.module';
+import { AppConfigService } from './services/app-config.service';
 import { UserService } from './services/user.service';
+
+export function initializeApp(appConfig: AppConfigService, userService: UserService) {
+  return () => appConfig.load().then(() => {
+    userService.populate();
+  });
+}
 
 @NgModule({
   declarations: [
@@ -40,16 +47,17 @@ import { UserService } from './services/user.service';
     provide: HTTP_INTERCEPTORS,
     useClass: HttpConfigInterceptor,
     multi: true
-  }, {
+  }, AppConfigService,
+  {
+    provide: APP_INITIALIZER,
+    useFactory: initializeApp,
+    multi: true,
+    deps: [AppConfigService, UserService]
+  },
+  {
     provide: HTTP_INTERCEPTORS,
     useClass: HttpErrorHandlerInterceptor,
     multi: true
-  }, {
-    provide: APP_INITIALIZER,
-    useFactory: (userService: UserService) =>
-      () => userService.populate().toPromise(),
-    multi: true,
-    deps: [UserService]
   },
   {
     provide: ErrorHandler,
@@ -58,3 +66,4 @@ import { UserService } from './services/user.service';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

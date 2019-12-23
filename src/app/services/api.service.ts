@@ -2,41 +2,42 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { AppConfigService } from './app-config.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
 
-    constructor(private _http: HttpClient) { }
+    constructor(private _http: HttpClient) {
+    }
 
     private formatErrors(error: any) {
         return throwError(error.error);
     }
 
     get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-        return this._http.get(`${environment.api_url}${path}`, { params })
+        return this._http.get(`${AppConfigService.settings.apiServer.url}${path}`, { params })
             .pipe(catchError(this.formatErrors));
     }
 
     put(path: string, body: Object = {}): Observable<any> {
         return this._http.put(
-            `${environment.api_url}${path}`,
+            `${AppConfigService.settings.apiServer.url}${path}`,
             JSON.stringify(body)
         ).pipe(catchError(this.formatErrors));
     }
 
     post(path: string, body: Object = {}): Observable<any> {
         return this._http.post(
-            `${environment.api_url}${path}`,
+            `${AppConfigService.settings.apiServer.url}${path}`,
             JSON.stringify(body)
         ).pipe(catchError(this.formatErrors));
     }
 
     delete(path): Observable<any> {
         return this._http.delete(
-            `${environment.api_url}${path}`
+            `${AppConfigService.settings.apiServer.url}${path}`
         ).pipe(catchError(this.formatErrors));
     }
 }
