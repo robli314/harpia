@@ -18,7 +18,7 @@ import { UserService } from './services/user.service';
 
 export function initializeApp(appConfig: AppConfigService, userService: UserService) {
   return () => appConfig.load().then(() => {
-    userService.populate();
+    return userService.populate().toPromise();
   });
 }
 

@@ -60,7 +60,6 @@ export class AppComponent implements OnInit {
     return supported;
   }
 
-  // TODO load browser supported versions from configuration file
   private isBrowserValid() {
     const browser = bowser.getParser(window.navigator.userAgent);
     return browser.satisfies({

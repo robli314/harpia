@@ -19,13 +19,14 @@ export class UserService {
     currentUser: Observable<User> = this._currentUserSubject.asObservable().pipe(distinctUntilChanged());
 
     // it will be emitting the last one value
+    // I could use a BehaviorSubject here, however I want to see how reply subjects actually works. Anyway, in that case as I have only
+    // a replay subject set to 1, the ReplaySubject will work as same as the BehaviorSubject.
     private _isAuthenticatedSubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
     isAuthenticated: Observable<boolean> = this._isAuthenticatedSubject.asObservable();
 
     constructor(private _apiService: ApiService,
         private _jwtService: JwtService) {
-        this._isAuthenticatedSubject.next(false);
     }
 
     /**
