@@ -1,23 +1,24 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AlertType, ModalAlertData } from 'src/app/models/modal-alert.model';
+import { Component, Inject, OnInit } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { AlertType, ModalAlertData } from "src/app/models/modal-alert.model";
 
 @Component({
-  templateUrl: './modal-alert.component.html',
-  styleUrls: ['./modal-alert.component.scss']
+  templateUrl: "./modal-alert.component.html",
+  styleUrls: ["./modal-alert.component.scss"]
 })
 export class ModalAlertComponent implements OnInit {
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ModalAlertData,
-    public dialogRef: MatDialogRef<ModalAlertComponent>) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: ModalAlertData,
+    public dialogRef: MatDialogRef<ModalAlertComponent>
+  ) {}
 
   onClose(): void {
-    this.dialogRef.close('');
+    this.dialogRef.close("");
   }
 
   /**
    * It returns the modal content class based on the alert type.
-   * 
+   *
    * @param {AlertType} type
    * @returns {string}
    * @memberof ModalAlertComponent
@@ -25,9 +26,9 @@ export class ModalAlertComponent implements OnInit {
   getContentClass(type: AlertType): string {
     switch (type) {
       case AlertType.ERROR:
-        return 'content-error';
+        return "content-error";
       default:
-        return '';
+        return "";
     }
   }
 
@@ -40,13 +41,14 @@ export class ModalAlertComponent implements OnInit {
    */
   getAlertIcon(type: AlertType): string {
     switch (type) {
-      case AlertType.INFO: return 'info';
-      case AlertType.WARNING: return 'warning';
-      case AlertType.ERROR: return 'error';
+      case AlertType.INFO:
+        return "info";
+      case AlertType.WARNING:
+        return "warning";
+      case AlertType.ERROR:
+        return "error";
     }
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 }
