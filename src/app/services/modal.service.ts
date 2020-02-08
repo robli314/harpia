@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalAlertComponent } from '../alert/modal-alert/modal-alert.component';
 import { AlertType, ModalAlertData } from '../models/modal-alert.model';
 
