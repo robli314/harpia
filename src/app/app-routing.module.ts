@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
   {
-    path: 'pages',
-    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) // dynamically loading
+    path: "projects",
+    loadChildren: () =>
+      import("./project/project.module").then(m => m.ProjectModule)
   },
-  { path: '', redirectTo: '/pages', pathMatch: 'full' },
+  { path: "", redirectTo: "/projects", pathMatch: "full" }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
