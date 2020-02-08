@@ -4,7 +4,6 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AlertModule } from "./alert/alert.module";
-import { ModalAlertComponent } from "./alert/modal-alert/modal-alert.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { AuthModule } from "./auth/auth.module";
@@ -13,9 +12,9 @@ import { HttpConfigInterceptor } from "./interceptors/http-config.interceptor";
 import { HttpErrorHandlerInterceptor } from "./interceptors/http-error-handler.interceptor";
 import { LayoutModule } from "./layout/layout.module";
 import { ProjectModule } from "./project/project.module";
+import { ProjectsComponent } from "./projects/projects/projects.component";
 import { AppConfigService } from "./services/app-config.service";
 import { UserService } from "./services/user.service";
-import { ProjectsComponent } from './projects/projects/projects.component';
 
 export function initializeApp(
   appConfig: AppConfigService,
@@ -29,13 +28,6 @@ export function initializeApp(
 
 @NgModule({
   declarations: [AppComponent, ProjectsComponent],
-  entryComponents: [
-    ModalAlertComponent /* The MatDialog instantiates components at runtime,
-    so the Angular compiler needs extra information, in order to create the
-    necessary ComponentyFactory for the dialog content. Therefore, we must
-    include the component class in the list of entryComponents, so the
-    Angular compiler knows how to create the ComponentFactory for it. */
-  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
