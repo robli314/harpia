@@ -8,9 +8,9 @@ export class SideBarService {
   private sideBarComponents: SideBarComponent[] = [];
 
   /**
-   * It adds a new sidnav component to managed by this service.
+   * It adds a new sidebar component to managed by this service.
    * @param id unique identifier
-   * @param sidenav component to be added
+   * @param sideBarComponent component to be added
    *
    * @throws Error in case the id is not unique.
    */
@@ -44,7 +44,7 @@ export class SideBarService {
   }
 
   /**
-   * It toggles a navbar identified by id.
+   * It toggles a sideBarComponent identified by id.
    * @param id unique identify to find the current navbar.
    */
   toggle(id: string) {
