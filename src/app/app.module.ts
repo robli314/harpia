@@ -12,7 +12,6 @@ import { HttpConfigInterceptor } from "./interceptors/http-config.interceptor";
 import { HttpErrorHandlerInterceptor } from "./interceptors/http-error-handler.interceptor";
 import { LayoutModule } from "./layout/layout.module";
 import { ProjectModule } from "./project/project.module";
-import { ProjectsComponent } from "./projects/projects/projects.component";
 import { AppConfigService } from "./services/app-config.service";
 import { UserService } from "./services/user.service";
 
@@ -27,7 +26,7 @@ export function initializeApp(
 }
 
 @NgModule({
-  declarations: [AppComponent, ProjectsComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

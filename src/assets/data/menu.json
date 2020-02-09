@@ -1,0 +1,24 @@
+[
+  {
+    "name": "General",
+    "menuItems": [
+      {
+        "icon": "dashboard",
+        "route": "/dashboard",
+        "title": "Dashboard"
+      },
+      {
+        "icon": "work",
+        "route": "/projects",
+        "title": "Projects"
+      },
+      {
+        "icon": "group",
+        "route": "/teams",
+        "title": "Teams"
+      }
+    ]
+  },
+
+  { "name": "Agile", "menuItems": [] }
+]
