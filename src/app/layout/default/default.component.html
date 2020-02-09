@@ -1,31 +1,6 @@
-<hp-nav-bar (toggleSidenav)="navigationSidenav.toggle()" (logout)="onLogout()">
+<hp-nav-bar
+  (toggleSidenav)="toogleSidenav(leftSidenavId)"
+  (logout)="onLogout()"
+>
 </hp-nav-bar>
-<mat-sidenav-container autosize>
-  <mat-sidenav #navigationSidenav mode="over" role="navigation">
-    <mat-nav-list>
-      <ng-container *ngFor="let group of menuGroups">
-        <mat-toolbar>
-          <mat-toolbar-row>
-            <h2 class="toolbar-title">{{ group.name }}</h2>
-          </mat-toolbar-row>
-        </mat-toolbar>
-        <a
-          *ngFor="let item of group.menuItems"
-          mat-list-item
-          (click)="navigationSidenav.close()"
-          [routerLink]="[item.route]"
-          routerLinkActive="list-item-active"
-        >
-          <mat-icon matListIcon class="nav-list-icon">
-            {{ item.icon }}
-          </mat-icon>
-          {{ item.title }}
-        </a>
-        <mat-divider></mat-divider>
-      </ng-container>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content role="main">
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<hp-sidebar [id]="leftSidenavId" [menuGroups]="menuGroups"></hp-sidebar>
