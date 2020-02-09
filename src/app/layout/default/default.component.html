@@ -3,4 +3,8 @@
   (logout)="onLogout()"
 >
 </hp-nav-bar>
-<hp-side-bar [id]="leftSidenavId" [menuGroups]="menuGroups"></hp-side-bar>
+<hp-side-bar
+  #sideBarLeft
+  [id]="leftSidenavId"
+  [menuGroups]="menuGroups"
+></hp-side-bar>

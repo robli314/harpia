@@ -1,20 +1,13 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnInit,
-  ViewChild
-} from "@angular/core";
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { MenuGroup } from "src/app/models/menu-group.model";
-import { SidenavService } from "src/app/services/sidebar.service";
 
 @Component({
   selector: "hp-side-bar",
   templateUrl: "./side-bar.component.html",
   styleUrls: ["./side-bar.component.scss"]
 })
-export class SideBarComponent implements OnInit, AfterViewInit {
+export class SideBarComponent implements OnInit {
   @ViewChild("navigationSidenav")
   public sidenav: MatSidenav;
 
@@ -24,11 +17,7 @@ export class SideBarComponent implements OnInit, AfterViewInit {
   @Input()
   id: string;
 
-  constructor(private _sidenavService: SidenavService) {}
+  constructor() {}
 
   ngOnInit() {}
-
-  ngAfterViewInit() {
-    this._sidenavService.add(this.id, this.sidenav);
-  }
 }
