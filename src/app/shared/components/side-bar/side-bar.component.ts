@@ -10,11 +10,11 @@ import { MenuGroup } from "src/app/models/menu-group.model";
 import { SidenavService } from "src/app/services/sidebar.service";
 
 @Component({
-  selector: "hp-sidebar",
-  templateUrl: "./sidebar.component.html",
-  styleUrls: ["./sidebar.component.scss"]
+  selector: "hp-side-bar",
+  templateUrl: "./side-bar.component.html",
+  styleUrls: ["./side-bar.component.scss"]
 })
-export class SidebarComponent implements OnInit, AfterViewInit {
+export class SideBarComponent implements OnInit, AfterViewInit {
   @ViewChild("navigationSidenav")
   public sidenav: MatSidenav;
 

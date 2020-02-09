@@ -23,7 +23,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { RouterModule } from "@angular/router";
 import { FooterComponent } from "./components/footer/footer.component";
 import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
-import { SidebarComponent } from "./components/sidebar/sidebar.component";
+import { SideBarComponent } from "./components/side-bar/side-bar.component";
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -53,7 +53,7 @@ const MATERIAL_MODULES = [
  *
  */
 @NgModule({
-  declarations: [FooterComponent, SidebarComponent, NavBarComponent],
+  declarations: [FooterComponent, SideBarComponent, NavBarComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -69,7 +69,7 @@ const MATERIAL_MODULES = [
     FlexLayoutModule,
     ...MATERIAL_MODULES,
     FooterComponent,
-    SidebarComponent,
+    SideBarComponent,
     NavBarComponent
   ]
 })
