@@ -13,7 +13,7 @@ export class ModalService {
 
   openErrorModal(status: number, name: string, message: string): any {
     // create error modal data
-    let data = new ModalAlertData({
+    const data = new ModalAlertData({
       title: "ERROR",
       message: message,
       closeButtonLabel: "Close",

@@ -21,7 +21,6 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { RouterModule } from "@angular/router";
-import { FooterComponent } from "./components/footer/footer.component";
 import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
 import { SideBarComponent } from "./components/side-bar/side-bar.component";
 
@@ -53,7 +52,7 @@ const MATERIAL_MODULES = [
  *
  */
 @NgModule({
-  declarations: [FooterComponent, SideBarComponent, NavBarComponent],
+  declarations: [SideBarComponent, NavBarComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -68,7 +67,6 @@ const MATERIAL_MODULES = [
     RouterModule,
     FlexLayoutModule,
     ...MATERIAL_MODULES,
-    FooterComponent,
     SideBarComponent,
     NavBarComponent
   ]

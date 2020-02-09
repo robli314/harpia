@@ -1,18 +1,24 @@
-@mixin hp-nav-theme($theme) {
-  $nav-list-icon-padding: 12px !default;
-  $toolbar-title-padding: 16px !default;
+@import "../../../scss/harpia.scss";
 
-  .list-item-active {
-    font-weight: bold;
-    color: mat-color(map-get($theme, accent), darker) !important;
-    background: rgba(0, 0, 0, 0.04);
-  }
+@include mat-core();
 
-  .nav-list-icon {
-    margin: 0 $nav-list-icon-padding 0 $nav-list-icon-padding;
-  }
+$primary: mat-palette($mat-blue, 800);
+$accent: mat-palette($mat-teal);
+$theme: mat-light-theme($primary, $accent);
 
-  .toolbar-title {
-    margin: 0 $toolbar-title-padding 0 $toolbar-title-padding;
-  }
+$nav-list-icon-padding: 12px !default;
+$toolbar-title-padding: 16px !default;
+
+.list-item-active {
+  font-weight: bold;
+  color: mat-color(map-get($theme, accent), darker) !important;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.nav-list-icon {
+  margin: 0 $nav-list-icon-padding 0 $nav-list-icon-padding;
+}
+
+.toolbar-title {
+  margin: 0 $toolbar-title-padding 0 $toolbar-title-padding;
 }

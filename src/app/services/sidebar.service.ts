@@ -12,7 +12,7 @@ export class SidenavService {
   }
 
   toogle(id: string) {
-    let sidenav: MatSidenav = this.sidenavs.find(element => element.id === id)
+    const sidenav: MatSidenav = this.sidenavs.find(element => element.id === id)
       .sidenav;
     sidenav.toggle();
   }

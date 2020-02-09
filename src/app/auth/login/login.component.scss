@@ -1,7 +1,7 @@
 @import "./../auth.module.scss";
 
-@include media-breakpoint('xs') {
-    mat-card {
-        max-width: 80%;
-    }
+@include media-breakpoint("xs") {
+  mat-card {
+    max-width: 80%;
+  }
 }
