@@ -29,6 +29,6 @@ export class SideBarComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this._sidenavService.addSidenav(this.id, this.sidenav);
+    this._sidenavService.add(this.id, this.sidenav);
   }
 }

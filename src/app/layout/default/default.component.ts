@@ -36,6 +36,7 @@ export class DefaultComponent extends BaseComponent
 
   ngOnDestroy() {
     super.ngOnDestroy();
+    this._sidenavService.remove(this.leftSidenavId);
   }
 
   onLogout() {
@@ -43,7 +44,7 @@ export class DefaultComponent extends BaseComponent
     this._userService.clearAuthentication();
   }
 
-  toogleSidenav(id: string) {
-    this._sidenavService.toogle(id);
+  toggleSidenav(id: string) {
+    this._sidenavService.toggle(id);
   }
 }
