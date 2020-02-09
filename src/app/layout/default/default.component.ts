@@ -1,30 +1,39 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { takeUntil } from "rxjs/operators";
 import { MenuGroup } from "src/app/models/menu-group.model";
 import { MenuService } from "src/app/services/menu.service";
 import { UserService } from "src/app/services/user.service";
+import { BaseComponent } from "src/app/shared/components/base/base.component";
 
 @Component({
   selector: "hp-default",
   templateUrl: "./default.component.html",
   styleUrls: ["./default.component.scss"]
 })
-export class DefaultComponent implements OnInit, OnDestroy {
+export class DefaultComponent extends BaseComponent
+  implements OnInit, OnDestroy {
   menuGroups: MenuGroup[];
 
   constructor(
     private _userService: UserService,
     private _router: Router,
     private _menuService: MenuService
-  ) {}
-
-  ngOnInit() {
-    this._menuService.getMenuData().subscribe(menuGroups => {
-      this.menuGroups = menuGroups;
-    });
+  ) {
+    super();
+    this._menuService
+      .getMenuData()
+      .pipe(takeUntil(this.$destroyed))
+      .subscribe(menuGroups => {
+        this.menuGroups = menuGroups;
+      });
   }
 
-  ngOnDestroy() {}
+  ngOnInit() {}
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
+  }
 
   onLogout() {
     this._router.navigate(["/login"]);

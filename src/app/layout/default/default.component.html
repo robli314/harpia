@@ -3,7 +3,7 @@
 <mat-sidenav-container autosize>
   <mat-sidenav #navigationSidenav mode="over" role="navigation">
     <mat-nav-list>
-      <ng-container *ngFor="let group of menuGroups; let i = index">
+      <ng-container *ngFor="let group of menuGroups">
         <mat-toolbar>
           <mat-toolbar-row>
             <h2 class="toolbar-title">{{ group.name }}</h2>

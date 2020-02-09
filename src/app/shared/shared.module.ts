@@ -51,8 +51,6 @@ const MATERIAL_MODULES = [
  * Th SharedModule is the place where we can put commonly used directives, pipes, and components
  * into one module and import that module wherever we need it.
  *
- * @export
- * @class SharedModule
  */
 @NgModule({
   declarations: [FooterComponent, SidebarComponent, NavBarComponent],
